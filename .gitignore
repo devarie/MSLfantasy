@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# google sheets credentials and cache
+credentials.json
+token.json
+/data/sheets-cache.json
