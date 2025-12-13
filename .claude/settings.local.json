@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Vercel deployment configuration and environment variable support\n\n- Add vercel.json with cron job for auto-updates every 5 minutes\n- Update googleSheets.js to support environment variables\n- Add DEPLOYMENT.md with setup instructions\n- Support both file-based and env-var-based credentials\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
