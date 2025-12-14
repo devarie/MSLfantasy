@@ -1,6 +1,3 @@
-import fs from 'fs/promises';
-import path from 'path';
-
 interface SheetData {
   success: boolean;
   data: string[][];
@@ -10,11 +7,20 @@ interface SheetData {
 
 async function getDeelnemersData(): Promise<SheetData | null> {
   try {
-    const dataPath = path.join(process.cwd(), 'data', 'sheets-cache.json');
-    const fileContent = await fs.readFile(dataPath, 'utf-8');
-    return JSON.parse(fileContent);
+    // Fetch directly from the API route (works on Railway)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/sheets`, {
+      cache: 'no-store', // Always get fresh data
+      next: { revalidate: 0 }
+    });
+
+    if (!response.ok) {
+      throw new Error(`API responded with ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error) {
-    console.error('Failed to read deelnemers data:', error);
+    console.error('Failed to fetch deelnemers data:', error);
     return null;
   }
 }
