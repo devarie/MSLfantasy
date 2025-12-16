@@ -10,113 +10,129 @@ interface FantasyScoreCardsProps {
 }
 
 export default function FantasyScoreCards({ players }: FantasyScoreCardsProps) {
-  // Sort players by score descending
-  const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+  // Get top 3 players
+  const top3 = [...players].sort((a, b) => b.score - a.score).slice(0, 3);
 
   // Find max score for percentage calculation
   const maxScore = Math.max(...players.map(p => p.score));
 
+  const ringConfigs = [
+    { color: '#ff453a', label: '🥇 1e plaats', radius: 140 }, // Red/Gold
+    { color: '#30d158', label: '🥈 2e plaats', radius: 110 }, // Green/Silver
+    { color: '#64d2ff', label: '🥉 3e plaats', radius: 80 },  // Blue/Bronze
+  ];
+
   return (
     <div className="w-full">
       <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-        Fantasy Totaal Scores
+        Top 3 Klassement
       </h2>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {sortedPlayers.map((player, index) => {
-          const percentage = maxScore > 0 ? (player.score / maxScore) * 100 : 0;
-          const isTop3 = index < 3;
+      {/* Single Activity Card */}
+      <div className="overflow-hidden rounded-3xl border border-zinc-200 bg-white p-8 shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-around">
+          {/* Activity Rings */}
+          <div className="relative flex h-80 w-80 items-center justify-center">
+            <svg className="h-full w-full -rotate-90" viewBox="0 0 320 320">
+              <defs>
+                {ringConfigs.map((config, index) => (
+                  <linearGradient key={index} id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style={{ stopColor: config.color, stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: config.color, stopOpacity: 0.6 }} />
+                  </linearGradient>
+                ))}
+              </defs>
 
-          // Color based on position
-          const ringColor = isTop3
-            ? index === 0
-              ? 'from-yellow-400 to-amber-500' // Gold
-              : index === 1
-              ? 'from-gray-300 to-gray-400' // Silver
-              : 'from-amber-600 to-amber-700' // Bronze
-            : 'from-blue-400 to-blue-600'; // Default blue
+              {/* Draw rings for top 3 */}
+              {top3.map((player, index) => {
+                const config = ringConfigs[index];
+                const percentage = maxScore > 0 ? (player.score / maxScore) * 100 : 0;
+                const circumference = 2 * Math.PI * config.radius;
+                const offset = circumference * (1 - percentage / 100);
 
-          return (
-            <div
-              key={player.name}
-              className={`group relative overflow-hidden rounded-2xl border p-6 transition-all hover:scale-105 ${
-                isTop3
-                  ? 'border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 dark:border-amber-900 dark:from-amber-950 dark:to-orange-950'
-                  : 'border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900'
-              }`}
-            >
-              {/* Position badge for top 3 */}
-              {isTop3 && (
-                <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-amber-600 text-sm font-bold text-white shadow-lg">
-                  #{index + 1}
-                </div>
-              )}
+                return (
+                  <g key={player.name}>
+                    {/* Background circle */}
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r={config.radius}
+                      stroke="currentColor"
+                      strokeWidth="20"
+                      fill="none"
+                      className="text-zinc-100 dark:text-zinc-800"
+                      opacity="0.3"
+                    />
+                    {/* Progress circle */}
+                    <circle
+                      cx="160"
+                      cy="160"
+                      r={config.radius}
+                      stroke={`url(#gradient-${index})`}
+                      strokeWidth="20"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={offset}
+                      className="transition-all duration-1000 ease-out"
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.3))',
+                      }}
+                    />
+                  </g>
+                );
+              })}
+            </svg>
 
-              {/* Circular progress ring */}
-              <div className="relative mx-auto mb-4 flex h-32 w-32 items-center justify-center">
-                {/* Background circle */}
-                <svg className="absolute h-full w-full -rotate-90 transform">
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="56"
-                    stroke="currentColor"
-                    strokeWidth="8"
-                    fill="none"
-                    className="text-zinc-200 dark:text-zinc-700"
-                  />
-                  {/* Progress circle */}
-                  <circle
-                    cx="64"
-                    cy="64"
-                    r="56"
-                    stroke="url(#gradient-${player.name})"
-                    strokeWidth="8"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeDasharray={`${2 * Math.PI * 56}`}
-                    strokeDashoffset={`${2 * Math.PI * 56 * (1 - percentage / 100)}`}
-                    className="transition-all duration-1000 ease-out"
-                  />
-                  <defs>
-                    <linearGradient id={`gradient-${player.name}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop
-                        offset="0%"
-                        style={{ stopColor: isTop3 ? (index === 0 ? '#fbbf24' : index === 1 ? '#d1d5db' : '#d97706') : '#60a5fa' }}
-                      />
-                      <stop
-                        offset="100%"
-                        style={{ stopColor: isTop3 ? (index === 0 ? '#f59e0b' : index === 1 ? '#9ca3af' : '#b45309') : '#2563eb' }}
-                      />
-                    </linearGradient>
-                  </defs>
-                </svg>
-
-                {/* Score in center */}
-                <div className="relative flex flex-col items-center">
-                  <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-                    {player.score}
-                  </span>
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                    {percentage.toFixed(0)}%
-                  </span>
-                </div>
-              </div>
-
-              {/* Player name */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-                  {player.name}
-                </h3>
-                {isTop3 && (
-                  <p className="mt-1 text-sm text-amber-600 dark:text-amber-400">
-                    {index === 0 ? '🏆 Kampioen' : index === 1 ? '🥈 Tweede' : '🥉 Derde'}
-                  </p>
-                )}
-              </div>
+            {/* Center text */}
+            <div className="absolute flex flex-col items-center text-center">
+              <span className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                Fantasy
+              </span>
+              <span className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
+                Top 3
+              </span>
             </div>
-          );
-        })}
+          </div>
+
+          {/* Player details */}
+          <div className="flex flex-col gap-4">
+            {top3.map((player, index) => {
+              const config = ringConfigs[index];
+              const percentage = maxScore > 0 ? (player.score / maxScore) * 100 : 0;
+
+              return (
+                <div
+                  key={player.name}
+                  className="flex items-center gap-4 rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800"
+                >
+                  <div
+                    className="h-3 w-3 rounded-full"
+                    style={{ backgroundColor: config.color }}
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-baseline justify-between">
+                      <span className="font-semibold text-zinc-900 dark:text-zinc-50">
+                        {player.name}
+                      </span>
+                      <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                        {percentage.toFixed(0)}%
+                      </span>
+                    </div>
+                    <div className="mt-1 flex items-center gap-2">
+                      <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                        {config.label}
+                      </span>
+                      <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                        {player.score}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
