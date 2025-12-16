@@ -1,4 +1,5 @@
 import Deelnemersstand from "@/components/Deelnemersstand";
+import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 
 export default function Home() {
   return (
@@ -9,11 +10,17 @@ export default function Home() {
             MSL Fantasy
           </h1>
           <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">
-            Live deelnemersstand
+            Live competitie standen
           </p>
         </div>
 
-        <Deelnemersstand />
+        {/* Deelnemers overzicht */}
+        <div className="mb-8">
+          <Deelnemersstand />
+        </div>
+
+        {/* Competitie tabs */}
+        <CompetitionsWrapper />
       </main>
     </div>
   );
