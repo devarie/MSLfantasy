@@ -7,10 +7,13 @@ interface SheetData {
 
 async function getDeelnemersData(): Promise<SheetData | null> {
   try {
-    // Fetch directly from the API route (works on Railway)
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    // Use absolute URL for server-side rendering on Railway
+    const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN
+      ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
     const response = await fetch(`${baseUrl}/api/sheets`, {
-      cache: 'no-store', // Always get fresh data
+      cache: 'no-store',
       next: { revalidate: 0 }
     });
 
