@@ -46,5 +46,12 @@ export default async function CompetitionsWrapper() {
     );
   }
 
-  return <CompetitionTabs sheets={data.sheets} lastUpdated={data.lastUpdated} />;
+  // Sort sheets to put Deelnemers first
+  const sortedSheets = [...data.sheets].sort((a, b) => {
+    if (a.name === 'Deelnemers') return -1;
+    if (b.name === 'Deelnemers') return 1;
+    return 0;
+  });
+
+  return <CompetitionTabs sheets={sortedSheets} lastUpdated={data.lastUpdated} />;
 }

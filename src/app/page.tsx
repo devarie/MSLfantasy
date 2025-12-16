@@ -1,4 +1,3 @@
-import Deelnemersstand from "@/components/Deelnemersstand";
 import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 
 export default function Home() {
@@ -14,12 +13,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Deelnemers overzicht */}
-        <div className="mb-8">
-          <Deelnemersstand />
-        </div>
-
-        {/* Competitie tabs */}
+        {/* Single table section with tabs */}
         <CompetitionsWrapper />
       </main>
     </div>
