@@ -1,4 +1,5 @@
 import CompetitionsWrapper from "@/components/CompetitionsWrapper";
+import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
 
 export default function Home() {
   return (
@@ -15,6 +16,9 @@ export default function Home() {
 
         {/* Single table section with tabs */}
         <CompetitionsWrapper />
+
+        {/* Fantasy score cards below */}
+        <FantasyScoresWrapper />
       </main>
     </div>
   );
