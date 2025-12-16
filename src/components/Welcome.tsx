@@ -35,8 +35,9 @@ export default async function Welcome() {
   const data = await getCompetitionsData();
 
   // Calculate counts from data
-  const playerCount = data?.sheets.find(sheet => sheet.name === 'Deelnemers')?.data.length - 1 || 10; // -1 for header
-  const eventCount = data?.sheets.filter(sheet => sheet.name !== 'Deelnemers').length || 10;
+  const deelnemersSheet = data?.sheets.find(sheet => sheet.name === 'Deelnemers');
+  const playerCount = deelnemersSheet?.data ? deelnemersSheet.data.length - 1 : 10; // -1 for header
+  const eventCount = data?.sheets ? data.sheets.filter(sheet => sheet.name !== 'Deelnemers').length : 10;
 
   const stats = [
     {
