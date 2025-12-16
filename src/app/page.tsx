@@ -1,5 +1,6 @@
 import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
+import Welcome from "@/components/Welcome";
 
 export default function Home() {
   return (
@@ -12,6 +13,11 @@ export default function Home() {
           <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">
             Live competitie standen
           </p>
+        </div>
+
+        {/* Welcome section */}
+        <div className="mb-12">
+          <Welcome />
         </div>
 
         {/* Single table section with tabs */}
