@@ -86,34 +86,10 @@ export default async function Welcome() {
         </p>
       </div>
 
-      {/* Accordion 1: Stats Grid */}
-      <WelcomeAccordion title="Statistieken">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <div
-                key={stat.label}
-                className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-4 dark:border-emerald-700 dark:bg-emerald-900/30"
-              >
-                <Icon className="mb-2 h-10 w-10 text-emerald-600 dark:text-emerald-400" />
-                <div className="mb-1 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
-                  {stat.value}
-                </div>
-                <div className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
-                  {stat.label}
-                </div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {stat.subtitle}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </WelcomeAccordion>
-
-      {/* Accordion 2: Rules */}
-      <WelcomeAccordion title="Spelregels">
+      {/* Accordions - closer spacing */}
+      <div className="space-y-3">
+        {/* Accordion 1: Rules */}
+        <WelcomeAccordion title="Spelregels">
         <div className="space-y-3">
           {rules.map((rule, index) => (
             <div key={index} className="flex gap-3">
@@ -126,7 +102,7 @@ export default async function Welcome() {
         </div>
       </WelcomeAccordion>
 
-      {/* Accordion 3: Warning */}
+      {/* Accordion 2: Warning */}
       <WelcomeAccordion title="Let op!">
         <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950">
           <div className="flex gap-3">
@@ -141,6 +117,31 @@ export default async function Welcome() {
           </div>
         </div>
       </WelcomeAccordion>
+      </div>
+
+      {/* Statistics Section - Outside Accordions */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <div
+              key={stat.label}
+              className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-4 shadow-sm dark:border-emerald-700 dark:bg-emerald-900/30"
+            >
+              <Icon className="mb-2 h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+              <div className="mb-1 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+                {stat.value}
+              </div>
+              <div className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
+                {stat.label}
+              </div>
+              <div className="text-sm text-zinc-500 dark:text-zinc-400">
+                {stat.subtitle}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
