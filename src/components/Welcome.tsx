@@ -76,7 +76,7 @@ export default async function Welcome() {
           <div className="rounded-full bg-emerald-600 p-2">
             <Trophy className="h-6 w-6 text-white" />
           </div>
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
             Welkom bij Ardeno Fantasy Sports!
           </h2>
         </div>

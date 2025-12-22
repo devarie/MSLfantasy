@@ -58,7 +58,7 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
 
       {/* Content */}
       <div className="rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
-        <h2 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+        <h2 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
           {currentSheet.name}
         </h2>
 

@@ -24,7 +24,7 @@ export default function FantasyScoreCards({ players }: FantasyScoreCardsProps) {
 
   return (
     <div className="w-full">
-      <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+      <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
         Top 3 Klassement
       </h2>
 

@@ -165,3 +165,47 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
+
+/* Custom Scrollbar Styling - Forest Green Theme */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(16, 185, 129) rgb(236, 253, 245);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(236, 253, 245);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(16, 185, 129);
+  border-radius: 5px;
+  border: 2px solid rgb(236, 253, 245);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(5, 150, 105);
+}
+
+/* Dark mode scrollbar */
+.dark * {
+  scrollbar-color: rgb(16, 185, 129) rgb(6, 78, 59);
+}
+
+.dark *::-webkit-scrollbar-track {
+  background: rgb(6, 78, 59);
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background: rgb(16, 185, 129);
+  border-color: rgb(6, 78, 59);
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background: rgb(52, 211, 153);
+}

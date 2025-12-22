@@ -46,11 +46,11 @@ export default async function Deelnemersstand() {
 
   return (
     <div className="w-full rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center mb-2">
           Deelnemersstand
         </h2>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
           Laatst bijgewerkt: {lastUpdate}
         </p>
       </div>

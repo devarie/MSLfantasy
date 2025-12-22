@@ -36,7 +36,7 @@ export default function Home() {
           {/* Scores Section */}
           <section id="scores" className="scroll-mt-20">
             <div className="mt-12">
-              <h2 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+              <h2 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
                 Competitie Standen
               </h2>
               <CompetitionsWrapper />
