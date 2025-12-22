@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const navItems = {
   "#welkom": {
@@ -70,7 +71,29 @@ export function MorphicNavbar() {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 py-4">
-        <div className="flex items-center justify-center">
+        {/* Mobile: Logo above navigation */}
+        <div className="mb-3 flex justify-center md:hidden">
+          <Image
+            src="/images/MSL-logo.webp"
+            alt="MSL Fantasy Logo"
+            width={120}
+            height={40}
+            className="h-auto w-auto max-h-10"
+          />
+        </div>
+
+        <div className="flex items-center justify-center gap-4">
+          {/* Desktop: Logo on the left */}
+          <div className="hidden md:block">
+            <Image
+              src="/images/MSL-logo.webp"
+              alt="MSL Fantasy Logo"
+              width={150}
+              height={50}
+              className="h-auto w-auto max-h-12"
+            />
+          </div>
+
           {/* Center navigation */}
           <div className="glass flex items-center justify-between overflow-hidden rounded-xl shadow-lg">
             {Object.entries(navItems).map(([path, { name }], index, array) => {
