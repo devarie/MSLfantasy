@@ -7,6 +7,7 @@ import AttractButton from '@/components/kokonutui/attract-button';
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
   const [showButton, setShowButton] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
     // Show button after animation completes (5s)
@@ -18,13 +19,17 @@ export default function SplashScreen() {
   }, []);
 
   const handleEnter = () => {
-    setIsVisible(false);
+    setIsFadingOut(true);
+    // Hide splash screen after fade-out animation (0.5s)
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 500);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900">
+    <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900 ${isFadingOut ? 'animate-fade-out' : ''}`}>
       <div className="animate-spin-y">
         <Image
           src="/images/mike 40 visual.webp"
