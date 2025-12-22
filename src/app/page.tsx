@@ -3,11 +3,15 @@ import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
 import Welcome from "@/components/Welcome";
 import { MorphicNavbar } from "@/components/kokonutui/morphic-navbar";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import SplashScreen from "@/components/SplashScreen";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
+      {/* Splash Screen */}
+      <SplashScreen />
+
       {/* Sticky Navigation */}
       <MorphicNavbar />
 

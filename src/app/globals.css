@@ -164,6 +164,19 @@
     border: 1px solid rgba(16, 185, 129, 0.15);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  .animate-spin-y {
+    animation: spinY 1.5s ease-in-out;
+  }
+
+  @keyframes spinY {
+    0% {
+      transform: rotateY(0deg);
+    }
+    100% {
+      transform: rotateY(720deg);
+    }
+  }
 }
 
 /* Custom Scrollbar Styling - Walnut Wood Theme */
