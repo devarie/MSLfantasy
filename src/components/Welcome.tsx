@@ -91,7 +91,7 @@ export default async function Welcome() {
       {/* Accordions - closer spacing */}
       <div className="space-y-3">
         {/* Accordion 1: Rules */}
-        <WelcomeAccordion title="Spelregels">
+        <WelcomeAccordion title="Spelregels" id="spelregels">
         <div className="space-y-3">
           {rules.map((rule, index) => (
             <div key={index} className="flex gap-3">

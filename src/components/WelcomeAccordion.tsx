@@ -7,13 +7,14 @@ interface AccordionProps {
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
+  id?: string;
 }
 
-export default function WelcomeAccordion({ title, children, defaultOpen = false }: AccordionProps) {
+export default function WelcomeAccordion({ title, children, defaultOpen = false, id }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className="w-full rounded-lg border border-emerald-200 bg-white/95 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
+    <div id={id} className="w-full rounded-lg border border-emerald-200 bg-white/95 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50 scroll-mt-20">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-emerald-50/50 dark:hover:bg-emerald-900/30"

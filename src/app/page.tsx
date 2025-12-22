@@ -35,11 +35,6 @@ export default function Home() {
             <Welcome />
           </section>
 
-          {/* Spelregels Section - This will be part of Welcome accordions */}
-          <section id="spelregels" className="scroll-mt-20">
-            {/* Empty section, spelregels is in Welcome accordion */}
-          </section>
-
           {/* Scores Section */}
           <section id="scores" className="scroll-mt-20">
             <div className="mt-12">
