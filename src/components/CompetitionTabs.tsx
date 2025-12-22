@@ -42,8 +42,8 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                 onClick={() => setActiveTab(index)}
                 className={`whitespace-nowrap rounded-t-lg px-4 py-2 text-sm font-medium transition-colors ${
                   activeTab === index
-                    ? 'border-b-2 border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100'
+                    ? 'border-b-2 border-emerald-600 bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                    : 'text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
                 }`}
               >
                 {sheet.name}
@@ -57,7 +57,7 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
       </div>
 
       {/* Content */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
         <h2 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
           {currentSheet.name}
         </h2>
@@ -89,7 +89,7 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                 {rows?.map((row, rowIndex) => (
                   <tr
                     key={rowIndex}
-                    className="border-b border-zinc-100 transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+                    className="border-b border-emerald-100 transition-colors hover:bg-emerald-50/50 dark:border-emerald-800 dark:hover:bg-emerald-900/30"
                   >
                     {row.map((cell, cellIndex) => (
                       <td

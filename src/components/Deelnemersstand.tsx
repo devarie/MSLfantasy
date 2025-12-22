@@ -45,7 +45,7 @@ export default async function Deelnemersstand() {
   const lastUpdate = new Date(sheetData.lastUpdated).toLocaleString('nl-NL');
 
   return (
-    <div className="w-full rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+    <div className="w-full rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
           Deelnemersstand
@@ -73,7 +73,7 @@ export default async function Deelnemersstand() {
             {rows.map((row, rowIndex) => (
               <tr
                 key={rowIndex}
-                className="border-b border-zinc-100 transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+                className="border-b border-emerald-100 transition-colors hover:bg-emerald-50/50 dark:border-emerald-800 dark:hover:bg-emerald-900/30"
               >
                 {row.map((cell, cellIndex) => (
                   <td

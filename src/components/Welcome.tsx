@@ -71,9 +71,9 @@ export default async function Welcome() {
   return (
     <div className="w-full space-y-6">
       {/* Welcome Text - Outside Accordions */}
-      <div className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
         <div className="mb-3 flex items-center gap-3">
-          <div className="rounded-full bg-blue-500 p-2">
+          <div className="rounded-full bg-emerald-600 p-2">
             <Trophy className="h-6 w-6 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
@@ -94,9 +94,9 @@ export default async function Welcome() {
             return (
               <div
                 key={stat.label}
-                className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800"
+                className="rounded-lg border border-emerald-200 bg-emerald-50/50 p-4 dark:border-emerald-700 dark:bg-emerald-900/30"
               >
-                <Icon className="mb-2 h-10 w-10 text-blue-600 dark:text-blue-400" />
+                <Icon className="mb-2 h-10 w-10 text-emerald-600 dark:text-emerald-400" />
                 <div className="mb-1 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
                   {stat.value}
                 </div>
@@ -117,7 +117,7 @@ export default async function Welcome() {
         <div className="space-y-3">
           {rules.map((rule, index) => (
             <div key={index} className="flex gap-3">
-              <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+              <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
                 {index + 1}
               </div>
               <p className="flex-1 text-zinc-700 dark:text-zinc-300">{rule}</p>

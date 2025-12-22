@@ -1,31 +1,52 @@
 import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
 import Welcome from "@/components/Welcome";
+import { MorphicNavbar } from "@/components/kokonutui/morphic-navbar";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-zinc-100 font-sans dark:from-zinc-900 dark:to-black">
-      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl">
-            MSL Fantasy
-          </h1>
-          <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">
-            Live competitie standen
-          </p>
-        </div>
+    <>
+      {/* Sticky Navigation */}
+      <MorphicNavbar />
 
-        {/* Welcome section */}
-        <div className="mb-12">
-          <Welcome />
-        </div>
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 font-sans dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900">
+        {/* Hero Image Section */}
+        <section id="hero" className="relative h-[60vh] min-h-[400px] w-full overflow-hidden">
+          <Image
+            src="/images/MSL visual.webp"
+            alt="MSL Fantasy Ardennen"
+            fill
+            priority
+            className="object-cover"
+          />
+        </section>
 
-        {/* Single table section with tabs */}
-        <CompetitionsWrapper />
+        <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          {/* Welcome Section */}
+          <section id="welkom" className="scroll-mt-20">
+            <Welcome />
+          </section>
 
-        {/* Fantasy score cards below */}
-        <FantasyScoresWrapper />
-      </main>
-    </div>
+          {/* Spelregels Section - This will be part of Welcome accordions */}
+          <section id="spelregels" className="scroll-mt-20">
+            {/* Empty section, spelregels is in Welcome accordion */}
+          </section>
+
+          {/* Scores Section */}
+          <section id="scores" className="scroll-mt-20">
+            <div className="mt-12">
+              <h2 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+                Competitie Standen
+              </h2>
+              <CompetitionsWrapper />
+            </div>
+
+            {/* Fantasy score cards below */}
+            <FantasyScoresWrapper />
+          </section>
+        </main>
+      </div>
+    </>
   );
 }
