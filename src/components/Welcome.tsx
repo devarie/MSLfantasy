@@ -72,17 +72,19 @@ export default async function Welcome() {
     <div className="w-full space-y-6">
       {/* Welcome Text - Outside Accordions */}
       <div className="rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
-        <div className="mb-3 flex items-center gap-3">
+        <div className="mb-4 flex flex-col items-center gap-3">
           <div className="rounded-full bg-emerald-600 p-2">
             <Trophy className="h-6 w-6 text-white" />
           </div>
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-            Welkom bij Ardeno Fantasy Sports!
+            Welkom bij de Mike Sports Leaque Fantasy!
           </h2>
+          <p className="text-lg font-semibold text-emerald-700 dark:text-emerald-400 text-center">
+            Speel nu mee in de eerste Fantasy Sports game van 2026!
+          </p>
         </div>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          Stel jouw ultieme A-Team samen en domineer de Ardennen! Kies 6 spelers, selecteer per
-          event je beste 3, en kroon een kopman die dubbele punten scoort.
+        <p className="text-zinc-600 dark:text-zinc-400 text-center">
+          Stel jouw ultieme Mike-Team samen en domineer de Ardennen! Kies 6 Mike's, en selecteer per event je beste 3, en kroon een kopman die dubbele punten scoort.
         </p>
       </div>
 
