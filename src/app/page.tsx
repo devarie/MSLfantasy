@@ -18,14 +18,14 @@ export default function Home() {
 
       <div className="min-h-screen bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 font-sans dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900">
         {/* Hero Image Section */}
-        <section id="hero" className="relative h-[60vh] min-h-[400px] w-full overflow-hidden bg-gradient-to-b from-sky-100 to-emerald-50 dark:from-slate-800 dark:to-emerald-950">
+        <section id="hero" className="relative h-screen min-h-[500px] md:h-[60vh] w-full overflow-hidden">
           <Image
             src="/images/MSL visual.webp"
             alt="MSL Fantasy Ardennen"
             fill
             priority
-            className="object-contain md:object-cover"
-            style={{ objectPosition: 'center-left' }}
+            className="object-cover"
+            style={{ objectPosition: 'center' }}
           />
         </section>
 
