@@ -2,6 +2,7 @@ import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
 import Welcome from "@/components/Welcome";
 import { MorphicNavbar } from "@/components/kokonutui/morphic-navbar";
+import DarkModeToggle from "@/components/DarkModeToggle";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,6 +10,11 @@ export default function Home() {
     <>
       {/* Sticky Navigation */}
       <MorphicNavbar />
+
+      {/* Fixed Dark Mode Toggle */}
+      <div className="fixed right-4 z-50" style={{ top: '18vh' }}>
+        <DarkModeToggle />
+      </div>
 
       <div className="min-h-screen bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 font-sans dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900">
         {/* Hero Image Section */}
@@ -19,6 +25,7 @@ export default function Home() {
             fill
             priority
             className="object-contain md:object-cover"
+            style={{ objectPosition: 'center-left' }}
           />
         </section>
 

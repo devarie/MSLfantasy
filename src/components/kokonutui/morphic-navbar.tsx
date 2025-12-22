@@ -2,7 +2,6 @@
 
 import clsx from "clsx";
 import { useState, useEffect } from "react";
-import DarkModeToggle from "@/components/DarkModeToggle";
 
 const navItems = {
   "#welkom": {
@@ -71,10 +70,7 @@ export function MorphicNavbar() {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Left spacer for balance */}
-          <div className="w-12"></div>
-
+        <div className="flex items-center justify-center">
           {/* Center navigation */}
           <div className="glass flex items-center justify-between overflow-hidden rounded-xl shadow-lg">
             {Object.entries(navItems).map(([path, { name }], index, array) => {
@@ -105,11 +101,6 @@ export function MorphicNavbar() {
                 </button>
               );
             })}
-          </div>
-
-          {/* Right side - Dark mode toggle */}
-          <div className="mt-4 md:mt-0">
-            <DarkModeToggle />
           </div>
         </div>
       </div>
