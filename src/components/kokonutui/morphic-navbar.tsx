@@ -76,9 +76,9 @@ export function MorphicNavbar() {
           <Image
             src="/images/MSL-logo.webp"
             alt="MSL Fantasy Logo"
-            width={120}
-            height={40}
-            className="h-auto w-auto max-h-10"
+            width={180}
+            height={60}
+            className="h-auto w-auto max-h-15"
           />
         </div>
 
@@ -88,9 +88,9 @@ export function MorphicNavbar() {
             <Image
               src="/images/MSL-logo.webp"
               alt="MSL Fantasy Logo"
-              width={150}
-              height={50}
-              className="h-auto w-auto max-h-12"
+              width={225}
+              height={75}
+              className="h-auto w-auto max-h-18"
             />
           </div>
 
