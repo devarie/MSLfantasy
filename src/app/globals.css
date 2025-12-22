@@ -166,7 +166,7 @@
   }
 
   .animate-spin-y {
-    animation: spinY 1.5s ease-in-out;
+    animation: spinY 5s ease-in-out;
   }
 
   @keyframes spinY {
@@ -174,7 +174,22 @@
       transform: rotateY(0deg);
     }
     100% {
-      transform: rotateY(720deg);
+      transform: rotateY(1080deg);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
