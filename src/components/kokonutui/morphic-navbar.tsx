@@ -108,7 +108,7 @@ export function MorphicNavbar() {
           </div>
 
           {/* Right side - Dark mode toggle */}
-          <div className="mt-2">
+          <div className="mt-2 md:mt-0">
             <DarkModeToggle />
           </div>
         </div>
