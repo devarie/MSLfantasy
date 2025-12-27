@@ -61,11 +61,11 @@ export default async function Welcome() {
   ];
 
   const rules = [
-    'Maak een team van 6 spelers uit de totale pool van 10 spelers',
-    'Selecteer per event 3 van je 6 spelers om punten te scoren',
-    'Wijs 1 kopman aan die dubbele punten verdient',
-    'Teams worden gelocked na het eerste event',
-    'Punten: 1e = 10pt, 2e = 9pt, ..., 10e = 1pt (kopman x2)',
+    'Maak een team van 6 spelers uit de totale pool van 10 spelers. Kies jezelf niet. Jij zit altijd in je team.',
+    'Selecteer per evenement 3 van je 6 spelers om punten te scoren. Niet jezelf, jij speelt altijd mee.',
+    'Wijs 1 kopman aan per evenement die dubbele punten verdient. Je mag hier ook jezelf kiezen',
+    'Deadline voor de eerste 6 man voor aankomst in de Ardennen. Deadline 3 man + kopman voor elke event. Stuur je team naar Minne voor de deadline',
+    'Puntenverdeling 1ste 10pt, 2de 8pt, 3de 6pt (Kopman x2). Games in teamverband. Iedereen uit het winnende team krijgt 10 punten',
   ];
 
   return (
@@ -84,7 +84,7 @@ export default async function Welcome() {
           </p>
         </div>
         <p className="text-zinc-600 dark:text-zinc-400 text-center">
-          Stel jouw ultieme Mike-Team samen en domineer de Ardennen! Kies 6 Mike's, en selecteer per event je beste 3, en kroon een kopman die dubbele punten scoort.
+          Stel jouw ultieme Mike-Team samen en domineer de Ardennen! Kies 6 Mike's, en selecteer per event je beste 3, en kroon/kies een kopman die dubbele punten scoort.
         </p>
       </div>
 
@@ -113,7 +113,7 @@ export default async function Welcome() {
               <h4 className="mb-1 font-semibold text-amber-900 dark:text-amber-100">Annuleringen mogelijk</h4>
               <p className="text-sm text-amber-800 dark:text-amber-200">
                 Events kunnen geannuleerd worden vanwege Corona, stakingen, of andere onvoorziene
-                omstandigheden. Net als bij de Tour de France!
+                omstandigheden. Hierin wordt altijd de organisatie van het desbetreffende evenement gevolgd.
               </p>
             </div>
           </div>
