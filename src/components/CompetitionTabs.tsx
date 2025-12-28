@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import PlayerBioModal from './PlayerBioModal';
+import { getPlayerBio, PlayerBio } from '@/data/playerBios';
 
 interface CompetitionSheet {
   name: string;
@@ -15,6 +17,7 @@ interface CompetitionTabsProps {
 
 export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const [selectedPlayer, setSelectedPlayer] = useState<PlayerBio | null>(null);
 
   if (!sheets || sheets.length === 0) {
     return (
@@ -100,7 +103,21 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                             : 'text-zinc-600 dark:text-zinc-400'
                         }`}
                       >
-                        {cell || '-'}
+                        {cellIndex === 0 && cell ? (
+                          <button
+                            onClick={() => {
+                              const playerBio = getPlayerBio(cell);
+                              if (playerBio) {
+                                setSelectedPlayer(playerBio);
+                              }
+                            }}
+                            className="cursor-pointer underline decoration-emerald-600 decoration-2 underline-offset-2 transition-colors hover:text-emerald-700 hover:decoration-emerald-700 dark:decoration-emerald-400 dark:hover:text-emerald-300 dark:hover:decoration-emerald-300"
+                          >
+                            {cell}
+                          </button>
+                        ) : (
+                          cell || '-'
+                        )}
                       </td>
                     ))}
                   </tr>
@@ -110,6 +127,13 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
           </div>
         )}
       </div>
+
+      {/* Player Bio Modal */}
+      <PlayerBioModal
+        isOpen={!!selectedPlayer}
+        onClose={() => setSelectedPlayer(null)}
+        player={selectedPlayer}
+      />
     </div>
   );
 }
