@@ -4,6 +4,7 @@ import Welcome from "@/components/Welcome";
 import { MorphicNavbar } from "@/components/kokonutui/morphic-navbar";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import SplashScreen from "@/components/SplashScreen";
+import ScrollSideMenu from "@/components/ScrollSideMenu";
 import Image from "next/image";
 
 export default function Home() {
@@ -19,6 +20,9 @@ export default function Home() {
       <div className="fixed right-4 z-50" style={{ top: '18vh' }}>
         <DarkModeToggle />
       </div>
+
+      {/* Scroll Side Menu */}
+      <ScrollSideMenu />
 
       <div className="min-h-screen bg-gradient-to-b from-sky-50 via-emerald-50 to-amber-50 font-sans dark:from-slate-900 dark:via-emerald-950 dark:to-stone-900">
         {/* Hero Image Section */}
