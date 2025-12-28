@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Beer, Pill, User } from 'lucide-react';
+import { Beer, Pill, User, ChevronLeft, ChevronRight } from 'lucide-react';
 import ImageModal from './ImageModal';
 
 interface MenuItem {
@@ -38,6 +38,7 @@ const menuItems: MenuItem[] = [
 
 export default function ScrollSideMenu() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedImage, setSelectedImage] = useState<MenuItem | null>(null);
 
   useEffect(() => {
@@ -66,19 +67,37 @@ export default function ScrollSideMenu() {
         }`}
       >
         <div className="flex flex-col gap-3 rounded-l-2xl border-y-4 border-l-4 border-emerald-600 bg-gradient-to-l from-emerald-50 to-emerald-100 p-3 shadow-2xl dark:from-emerald-950 dark:to-emerald-900">
+          {/* Toggle Button */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="group flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-emerald-600 px-3 py-2 transition-all hover:scale-105 hover:bg-emerald-700 dark:border-emerald-500 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+            aria-label={isExpanded ? 'Sluit menu' : 'Open menu'}
+          >
+            {isExpanded ? (
+              <ChevronRight className="h-5 w-5 text-white" />
+            ) : (
+              <ChevronLeft className="h-5 w-5 text-white" />
+            )}
+          </button>
+
+          {/* Menu Items */}
           {menuItems.map((item) => {
             const Icon = item.icon;
             return (
               <button
                 key={item.id}
                 onClick={() => setSelectedImage(item)}
-                className="group flex items-center gap-3 rounded-xl border-2 border-emerald-600 bg-white px-4 py-3 transition-all hover:scale-105 hover:border-emerald-700 hover:bg-emerald-50 hover:shadow-lg dark:border-emerald-700 dark:bg-emerald-950 dark:hover:border-emerald-600 dark:hover:bg-emerald-900"
+                className={`group flex items-center rounded-xl border-2 border-emerald-600 bg-white py-3 transition-all hover:scale-105 hover:border-emerald-700 hover:bg-emerald-50 hover:shadow-lg dark:border-emerald-700 dark:bg-emerald-950 dark:hover:border-emerald-600 dark:hover:bg-emerald-900 ${
+                  isExpanded ? 'gap-3 px-4' : 'justify-center px-3'
+                }`}
                 aria-label={item.label}
               >
-                <Icon className="h-5 w-5 text-emerald-700 transition-colors group-hover:text-emerald-800 dark:text-emerald-400 dark:group-hover:text-emerald-300" />
-                <span className="whitespace-nowrap text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-                  {item.label}
-                </span>
+                <Icon className="h-5 w-5 flex-shrink-0 text-emerald-700 transition-colors group-hover:text-emerald-800 dark:text-emerald-400 dark:group-hover:text-emerald-300" />
+                {isExpanded && (
+                  <span className="whitespace-nowrap text-sm font-semibold text-emerald-900 dark:text-emerald-100">
+                    {item.label}
+                  </span>
+                )}
               </button>
             );
           })}
