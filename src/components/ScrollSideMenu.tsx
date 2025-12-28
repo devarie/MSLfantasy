@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Beer, Pill, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Beer, Wind, User, ChevronLeft, ChevronRight } from 'lucide-react';
 import ImageModal from './ImageModal';
 
 interface MenuItem {
@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
   {
     id: 'snuifje',
     label: 'Tussen Snuifje',
-    icon: Pill,
+    icon: Wind,
     imageSrc: '/images/mike-tussen-snuifje2.png',
     imageAlt: 'Mike tussen snuifje',
   },

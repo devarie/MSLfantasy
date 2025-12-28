@@ -111,7 +111,7 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                                 setSelectedPlayer(playerBio);
                               }
                             }}
-                            className="cursor-pointer underline decoration-emerald-600 decoration-2 underline-offset-2 transition-colors hover:text-emerald-700 hover:decoration-emerald-700 dark:decoration-emerald-400 dark:hover:text-emerald-300 dark:hover:decoration-emerald-300"
+                            className="cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
                           >
                             {cell}
                           </button>
