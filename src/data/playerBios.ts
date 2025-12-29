@@ -53,14 +53,13 @@ export const playerBios: Record<string, PlayerBio> = {
   'Geert': {
     name: 'Geert',
     avatar: '/images/avatars/geert.webp',
-    bio: 'Op z’n Mokums Mikkie Jordaan. 
-Bekend van de uitspraak there s no I in team, but there is an I in win en als de crying meme. 
+    bio: `Op z'n Mokums Mikkie Jordaan.
+Bekend van de uitspraak there's no I in team, but there is an I in win en als de crying meme.
 Nog bekender van NBA basketball, wat hij in de jaren 90 op kaart zette wereldwijd.
-Was in die periode ook gym rat avant la lettre, met biceps als de Kilimanjaro. 
-Pakt nu op zn oude dag graag een golfje, op de golfbaan that is.
-Mikkie is de ultieme strijder. Hij wil altijd van iedereen winnen met elk spel. 
-Valsspelen geen bezwaar: een overwinning op dubieuze wijze is nog steeds een overwinning.
-',
+Was in die periode ook gym rat avant la lettre, met biceps als de Kilimanjaro.
+Pakt nu op z'n oude dag graag een golfje, op de golfbaan that is.
+Mikkie is de ultieme strijder. Hij wil altijd van iedereen winnen met elk spel.
+Valsspelen geen bezwaar: een overwinning op dubieuze wijze is nog steeds een overwinning.`,
   },
 
   
