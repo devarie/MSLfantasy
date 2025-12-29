@@ -14,7 +14,7 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
-    <div className="h-[400px] w-full max-w-sm" style={{ perspective: '1000px' }}>
+    <div className="h-[600px] w-full max-w-lg" style={{ perspective: '1000px' }}>
       <div
         className="relative h-full w-full cursor-pointer transition-transform duration-700"
         style={{
@@ -30,17 +30,18 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
               <Image
                 src={avatar}
                 alt={name}
-                width={200}
-                height={200}
-                className="h-48 w-48 object-cover"
+                width={240}
+                height={240}
+                className="h-60 w-60 object-cover"
+                unoptimized
               />
             ) : (
-              <div className="flex h-48 w-48 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
-                <User className="h-24 w-24 text-emerald-600 dark:text-emerald-300" />
+              <div className="flex h-60 w-60 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
+                <User className="h-32 w-32 text-emerald-600 dark:text-emerald-300" />
               </div>
             )}
           </div>
-          <h3 className="text-center text-2xl font-bold text-emerald-900 dark:text-emerald-100">
+          <h3 className="text-center text-3xl font-bold text-emerald-900 dark:text-emerald-100">
             {name}
           </h3>
           <p className="mt-4 text-center text-sm text-emerald-700 dark:text-emerald-300">
@@ -49,15 +50,17 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
         </div>
 
         {/* Back Side */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-600 to-emerald-700 p-8 shadow-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-emerald-700 dark:to-emerald-900">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-            <User className="h-8 w-8 text-white" />
+        <div className="absolute inset-0 flex flex-col rounded-2xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-600 to-emerald-700 p-6 shadow-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-emerald-700 dark:to-emerald-900">
+          <div className="mb-4 flex items-center justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+              <User className="h-8 w-8 text-white" />
+            </div>
           </div>
-          <h3 className="mb-4 text-center text-xl font-bold text-white">
+          <h3 className="mb-4 text-center text-2xl font-bold text-white">
             {name}
           </h3>
-          <div className="max-h-[200px] overflow-y-auto rounded-xl bg-white/10 p-4 backdrop-blur-sm">
-            <p className="text-center text-sm leading-relaxed text-white">
+          <div className="flex-1 overflow-y-auto rounded-xl bg-white/10 p-6 backdrop-blur-sm">
+            <p className="whitespace-pre-line text-sm leading-relaxed text-white">
               {bio}
             </p>
           </div>
