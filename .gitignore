@@ -44,4 +44,8 @@ next-env.d.ts
 # google sheets credentials and cache
 credentials.json
 token.json
+service-account.json
+credentials_base64.txt
+token_base64.txt
+token_base64_new.txt
 /data/sheets-cache.json
