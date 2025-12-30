@@ -1,5 +1,6 @@
 import CompetitionsWrapper from "@/components/CompetitionsWrapper";
 import FantasyScoresWrapper from "@/components/FantasyScoresWrapper";
+import FantasyChartsWrapper from "@/components/FantasyChartsWrapper";
 import Welcome from "@/components/Welcome";
 import { MorphicNavbar } from "@/components/kokonutui/morphic-navbar";
 import DarkModeToggle from "@/components/DarkModeToggle";
@@ -54,6 +55,9 @@ export default function Home() {
 
             {/* Fantasy score cards below */}
             <FantasyScoresWrapper />
+
+            {/* Fantasy charts below - separate container for easy removal */}
+            <FantasyChartsWrapper />
           </section>
         </main>
       </div>
