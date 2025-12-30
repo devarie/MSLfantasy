@@ -21,6 +21,11 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
 
   const hasValidAvatar = avatar && avatar !== '/images/avatars/placeholder.jpg' && !imageError;
 
+  // Debug logging
+  useEffect(() => {
+    console.log('CardFlip mounted:', { name, avatar, hasValidAvatar, imageError, mounted });
+  }, [name, avatar, hasValidAvatar, imageError, mounted]);
+
   // Render a skeleton during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
@@ -44,25 +49,29 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
         <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-10 shadow-2xl [backface-visibility:hidden] dark:from-emerald-900 dark:to-emerald-950">
           <div className="mb-8 overflow-hidden rounded-full border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
             {hasValidAvatar ? (
-              <Image
-                src={avatar}
-                alt={name}
-                width={288}
-                height={288}
-                className="h-72 w-72 object-cover"
-                onError={(e) => {
-                  console.error('Failed to load avatar:', avatar, e);
-                  setImageError(true);
-                }}
-                onLoad={() => {
-                  console.log('Avatar loaded successfully:', avatar);
-                }}
-                priority
-                unoptimized
-              />
+              <div className="relative">
+                <Image
+                  src={avatar}
+                  alt={name}
+                  width={288}
+                  height={288}
+                  className="h-72 w-72 object-cover"
+                  onError={(e) => {
+                    console.error('Failed to load avatar:', avatar, e);
+                    setImageError(true);
+                  }}
+                  onLoad={() => {
+                    console.log('Avatar loaded successfully:', avatar);
+                  }}
+                  priority
+                  unoptimized
+                />
+                <div className="absolute top-0 left-0 text-xs text-red-500 bg-white p-1">IMG</div>
+              </div>
             ) : (
               <div className="flex h-72 w-72 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
                 <User className="h-40 w-40 text-emerald-600 dark:text-emerald-300" />
+                <div className="absolute top-0 left-0 text-xs text-red-500 bg-white p-1">PLACEHOLDER</div>
               </div>
             )}
           </div>
