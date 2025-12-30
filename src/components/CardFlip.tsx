@@ -21,11 +21,6 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
 
   const hasValidAvatar = avatar && avatar !== '/images/avatars/placeholder.jpg' && !imageError;
 
-  // Debug logging
-  useEffect(() => {
-    console.log('CardFlip mounted:', { name, avatar, hasValidAvatar, imageError, mounted });
-  }, [name, avatar, hasValidAvatar, imageError, mounted]);
-
   // Render a skeleton during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
@@ -56,22 +51,14 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
                   width={288}
                   height={288}
                   className="h-full w-full object-cover rounded-full"
-                  onError={(e) => {
-                    console.error('Failed to load avatar:', avatar, e);
-                    setImageError(true);
-                  }}
-                  onLoad={() => {
-                    console.log('Avatar loaded successfully:', avatar);
-                  }}
+                  onError={() => setImageError(true)}
                   priority
                   unoptimized
                 />
-                <div className="absolute top-0 left-0 text-xs text-red-500 bg-white p-1 z-50">IMG</div>
               </div>
             ) : (
               <div className="flex h-72 w-72 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
                 <User className="h-40 w-40 text-emerald-600 dark:text-emerald-300" />
-                <div className="absolute top-0 left-0 text-xs text-red-500 bg-white p-1">PLACEHOLDER</div>
               </div>
             )}
           </div>
