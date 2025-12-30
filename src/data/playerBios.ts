@@ -8,7 +8,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Dylan': {
     name: 'Dylan',
     avatar: '/images/avatars/dylan.webp',
-    bio: 'Mike de Boer, is een wandelend stijlicoon met een zonnebank-abonnement en een feilloos gevoel voor flair. Styling is voor hem geen vak, maar een levensstijl — licht ijdel, een tikje vals, maar altijd on point. Hij leeft voor lekker eten, glanzende stoffen en een bronslevel die het liefst gevaarlijk dicht in de buurt komt van Michael Knight (aka Mitch McCannon). Met zijn gestroomlijnde verschijning glijdt hij moeiteloos van modeshow naar roddelcircuit, altijd met een opgetrokken wenkbrauw en een perfect gekozen sjaaltje.\nDoor zijn gestroomlijnde kop is hij rap — bijna net zo snel als Speedy Gonzales 🇲🇽. Geef hem een halfje en je bent op hoogte van de laatste roddels (vaak nog vóór ze gebeurd zijn). Een gladde glijder met een rebels randje: speelt niet altijd volgens het boekje… pas ook op in de sauna en als de lichten uit zijn. 🫠⁠Kan een dealtje op waarde schatten🇮🇱.',
+    bio: 'Mike de Boer, is een wandelend stijlicoon met een zonnebank-abonnement en een feilloos gevoel voor flair. Styling is voor hem geen vak, maar een levensstijl - licht ijdel, een tikje vals, maar altijd on point. Hij leeft voor lekker eten, glanzende stoffen en een bronslevel die het liefst gevaarlijk dicht in de buurt komt van Michael Knight (aka Mitch McCannon). Met zijn gestroomlijnde verschijning glijdt hij moeiteloos van modeshow naar roddelcircuit, altijd met een opgetrokken wenkbrauw en een perfect gekozen sjaaltje.\nDoor zijn gestroomlijnde kop is hij rap - bijna net zo snel als Speedy Gonzales. Geef hem een halfje en je bent op hoogte van de laatste roddels (vaak nog voor ze gebeurd zijn). Een gladde glijder met een rebels randje: speelt niet altijd volgens het boekje... pas ook op in de sauna en als de lichten uit zijn. Kan een dealtje op waarde schatten.',
   },
   'Mike': {
     name: 'Mike',
@@ -28,7 +28,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Diederik': {
     name: 'Diederik',
     avatar: '/images/avatars/diederik.webp',
-    bio: 'Magnesium Mike\nGeen kleffe handjes voor deze allround atleet. Met de paplepel ingegoten als turntalent en met een betrouwbare supplier van solide blokken van het witte goed, zal deze Mike nooit verlegen zitten om het witte goed. En dat is maar goed ook want Magnesium Mike houdt graag grip op de zaken. Solide lagen wax, goed geslepen ijzers, bergen magnesium: niets wordt aan het toeval over gelaten. Liever een poefje te veel dan een onnodige uitglijder. In de witte stofwolken blijft de competitie verdwaasd achter…',
+    bio: 'Magnesium Mike\nGeen kleffe handjes voor deze allround atleet. Met de paplepel ingegoten als turntalent en met een betrouwbare supplier van solide blokken van het witte goed, zal deze Mike nooit verlegen zitten om het witte goed. En dat is maar goed ook want Magnesium Mike houdt graag grip op de zaken. Solide lagen wax, goed geslepen ijzers, bergen magnesium: niets wordt aan het toeval over gelaten. Liever een poefje te veel dan een onnodige uitglijder. In de witte stofwolken blijft de competitie verdwaasd achter...',
   },
   'Minne': {
     name: 'Minne',
@@ -38,7 +38,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Stephan': {
     name: 'Stephan',
     avatar: '/images/avatars/stephan.webp',
-    bio: 'Michael Phelps zwemt niet zomaar, hij jaagt. Elke slag is een bewuste stap richting nóg een medaille, elk startschot een herinnering dat winnen het enige doel is. In zijn hoofd klinkt steeds weer chiang klang kling — het dwangmatige hilarische geluid dat medailles maken wanneer ze tegen elkaar tikken.\nVoor Phelps is winnen daarom heilig. Hij wil niet alleen de allerbeste topsporters verslaan en de meeste medailles innen, maar ook elke Mike of Michael die dezelfde naam draagt laten weten dat ze écht niets kunnen winnen. Het is simpelweg oorlog.',
+    bio: 'Michael Phelps zwemt niet zomaar, hij jaagt. Elke slag is een bewuste stap richting nog een medaille, elk startschot een herinnering dat winnen het enige doel is. In zijn hoofd klinkt steeds weer chiang klang kling - het dwangmatige hilarische geluid dat medailles maken wanneer ze tegen elkaar tikken.\nVoor Phelps is winnen daarom heilig. Hij wil niet alleen de allerbeste topsporters verslaan en de meeste medailles innen, maar ook elke Mike of Michael die dezelfde naam draagt laten weten dat ze echt niets kunnen winnen. Het is simpelweg oorlog.',
   },
   'Oscar': {
     name: 'Oscar',
@@ -48,7 +48,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Maarten': {
     name: 'Maarten',
     avatar: '/images/avatars/maarten.webp',
-    bio: 'Altijd mooie verhalen komen er uit deze jongen. Ook veel klachtenbrieven in mooie woorden. Aan lege enveloppen niet te kort. De inhoud zit al in zijn kop. Meik is een geoliede machine, geen gevoelens, rekent achterlijk snel. Niet stoppen tot de dubbele bonus is geteld. Niet tevreden met je abonnementje? Hij zit al lekker in het zonnetje.\nHet zonnetje doet Meik goed. Hij hangt er zo hard, het werd zijn beroep. Maar Meik is ook een fool gast. en zit met zijn smoel in je kledingkast. Hij eet de helft van je bord, En kijk hem stinken, niet te kort. Zijn het uitjes, of knoflook of is het Meik het niggertje? Toch Merel 2 keer op en neer, in elkaar als kikkertjes.\nEn toen zo volwassen zo beleefd. Zijn leven zonder planning kan zo. niet worden geleefd. Voor elke trip brengt hij nu eigen sokken. En doet Meik de. Boodschapjes bij de appie of de blokker. Je kan hem vinden op het ijs, in de bergen of de zee. Met zijn dichtgevroren smoel, praat er maar niet mee.',
+    bio: 'Altijd mooie verhalen komen er uit deze jongen. Ook veel klachtenbrieven in mooie woorden. Aan lege enveloppen niet te kort. De inhoud zit al in zijn kop. Meik is een geoliede machine, geen gevoelens, rekent razendsnel. Niet stoppen tot de dubbele bonus is geteld. Niet tevreden met je abonnementje? Hij zit al lekker in het zonnetje.\nHet zonnetje doet Meik goed. Hij hangt er zo hard, het werd zijn beroep. Maar Meik is ook een coole gast en zit met zijn smoel in je kledingkast. Hij eet de helft van je bord, en kijk hem stinken, niet te kort. Zijn het uitjes, of knoflook of gewoon Meik? Toch Merel 2 keer op en neer, in elkaar als kikkertjes.\nEn toen zo volwassen zo beleefd. Zijn leven zonder planning kan zo niet worden geleefd. Voor elke trip brengt hij nu eigen sokken. En doet Meik de boodschapjes bij de appie of de blokker. Je kan hem vinden op het ijs, in de bergen of de zee. Met zijn dichtgevroren smoel, praat er maar niet mee.',
   },
   'Geert': {
     name: 'Geert',
