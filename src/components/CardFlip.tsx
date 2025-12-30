@@ -36,7 +36,7 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   }
 
   return (
-    <div className="h-[700px] w-full max-w-2xl" style={{ perspective: '1500px' }}>
+    <div className="h-[800px] w-full max-w-3xl" style={{ perspective: '1500px' }}>
       <div
         className="relative h-full w-full cursor-pointer transition-transform duration-700"
         style={{
@@ -86,21 +86,35 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
         {/* Back Side */}
         <div className="absolute inset-0 flex flex-col rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-600 to-emerald-700 p-8 shadow-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-emerald-700 dark:to-emerald-900">
           <div className="mb-6 flex items-center justify-center">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-              <User className="h-10 w-10 text-white" />
-            </div>
+            {hasValidAvatar ? (
+              <div className="relative h-24 w-24">
+                <Image
+                  src={avatar}
+                  alt={name}
+                  width={96}
+                  height={96}
+                  className="h-full w-full object-cover rounded-full border-4 border-white/30"
+                  priority
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30">
+                <User className="h-12 w-12 text-white" />
+              </div>
+            )}
           </div>
           <h3 className="mb-6 text-center text-3xl font-bold text-white">
             {name}
           </h3>
-          <div className="flex-1 overflow-y-auto rounded-2xl bg-white/10 p-8 backdrop-blur-sm">
-            <div className="text-base leading-relaxed text-white space-y-3">
+          <div className="flex-1 overflow-y-auto rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
+            <div className="text-lg leading-relaxed text-white space-y-4">
               {bio.split('\n').map((line, i) => (
                 <p key={i}>{line}</p>
               ))}
             </div>
           </div>
-          <p className="mt-6 text-center text-sm text-white/80">
+          <p className="mt-6 text-center text-base text-white/90">
             Klik om terug te gaan
           </p>
         </div>
