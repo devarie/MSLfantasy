@@ -38,6 +38,37 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
   const [headers, ...rows] = currentSheet.data || [[]];
   const lastUpdate = new Date(lastUpdated).toLocaleString('nl-NL');
 
+  // Get all unique player names from the current sheet
+  const allPlayerNames = rows
+    .map(row => {
+      const cellValue = row[0];
+      if (!cellValue) return null;
+      // Extract name from parentheses if present
+      const match = cellValue.match(/\(([^)]+)\)/);
+      return match ? match[1] : cellValue;
+    })
+    .filter(Boolean) as string[];
+
+  // Get all valid player bios
+  const allPlayers = allPlayerNames
+    .map(name => getPlayerBio(name))
+    .filter(Boolean) as PlayerBio[];
+
+  // Navigation functions
+  const handleNextPlayer = () => {
+    if (!selectedPlayer || allPlayers.length === 0) return;
+    const currentIndex = allPlayers.findIndex(p => p.name === selectedPlayer.name);
+    const nextIndex = (currentIndex + 1) % allPlayers.length;
+    setSelectedPlayer(allPlayers[nextIndex]);
+  };
+
+  const handlePreviousPlayer = () => {
+    if (!selectedPlayer || allPlayers.length === 0) return;
+    const currentIndex = allPlayers.findIndex(p => p.name === selectedPlayer.name);
+    const previousIndex = (currentIndex - 1 + allPlayers.length) % allPlayers.length;
+    setSelectedPlayer(allPlayers[previousIndex]);
+  };
+
   return (
     <div className="w-full">
       {/* Tabs */}
@@ -141,6 +172,8 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
         isOpen={!!selectedPlayer}
         onClose={() => setSelectedPlayer(null)}
         player={selectedPlayer}
+        onNext={handleNextPlayer}
+        onPrevious={handlePreviousPlayer}
       />
     </div>
   );

@@ -11,7 +11,6 @@ interface CardFlipProps {
 }
 
 export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -31,25 +30,19 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   }
 
   return (
-    <div className="h-[800px] w-full max-w-3xl" style={{ perspective: '1500px' }}>
-      <div
-        className="relative h-full w-full cursor-pointer transition-transform duration-700"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-        }}
-        onClick={() => setIsFlipped(!isFlipped)}
-      >
-        {/* Front Side */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-10 shadow-2xl [backface-visibility:hidden] dark:from-emerald-900 dark:to-emerald-950">
-          <div className="mb-8 rounded-full border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
+    <div className="h-[800px] w-full max-w-3xl">
+      <div className="relative h-full w-full">
+        {/* Single Side with Avatar, Name, and Bio */}
+        <div className="h-full flex flex-col items-center rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 shadow-2xl dark:from-emerald-900 dark:to-emerald-950">
+          {/* Avatar */}
+          <div className="mb-6 rounded-full border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
             {hasValidAvatar ? (
-              <div className="relative h-72 w-72">
+              <div className="relative h-48 w-48">
                 <Image
                   src={avatar}
                   alt={name}
-                  width={288}
-                  height={288}
+                  width={192}
+                  height={192}
                   className="h-full w-full object-cover rounded-full"
                   onError={() => setImageError(true)}
                   priority
@@ -57,53 +50,25 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
                 />
               </div>
             ) : (
-              <div className="flex h-72 w-72 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
-                <User className="h-40 w-40 text-emerald-600 dark:text-emerald-300" />
+              <div className="flex h-48 w-48 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
+                <User className="h-24 w-24 text-emerald-600 dark:text-emerald-300" />
               </div>
             )}
           </div>
-          <h3 className="text-center text-4xl font-bold text-emerald-900 dark:text-emerald-100">
-            {name}
-          </h3>
-          <p className="mt-6 text-center text-base text-emerald-700 dark:text-emerald-300">
-            Klik om bio te lezen
-          </p>
-        </div>
 
-        {/* Back Side */}
-        <div className="absolute inset-0 flex flex-col rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-600 to-emerald-700 p-8 shadow-2xl [backface-visibility:hidden] [transform:rotateY(180deg)] dark:from-emerald-700 dark:to-emerald-900">
-          <div className="mb-6 flex items-center justify-center">
-            {hasValidAvatar ? (
-              <div className="relative h-24 w-24">
-                <Image
-                  src={avatar}
-                  alt={name}
-                  width={96}
-                  height={96}
-                  className="h-full w-full object-cover rounded-full border-4 border-white/30"
-                  priority
-                  unoptimized
-                />
-              </div>
-            ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30">
-                <User className="h-12 w-12 text-white" />
-              </div>
-            )}
-          </div>
-          <h3 className="mb-6 text-center text-3xl font-bold text-white">
+          {/* Name */}
+          <h3 className="mb-6 text-center text-4xl font-bold text-emerald-900 dark:text-emerald-100">
             {name}
           </h3>
-          <div className="flex-1 overflow-y-auto rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-            <div className="text-lg leading-relaxed text-white space-y-4">
+
+          {/* Bio */}
+          <div className="flex-1 overflow-y-auto rounded-2xl bg-white/80 dark:bg-emerald-900/50 p-6 backdrop-blur-sm border-2 border-emerald-200 dark:border-emerald-700">
+            <div className="text-lg leading-relaxed text-emerald-900 dark:text-emerald-100 space-y-4">
               {bio.split('\n').map((line, i) => (
                 <p key={i}>{line}</p>
               ))}
             </div>
           </div>
-          <p className="mt-6 text-center text-base text-white/90">
-            Klik om terug te gaan
-          </p>
         </div>
       </div>
     </div>
