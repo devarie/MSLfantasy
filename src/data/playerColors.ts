@@ -6,13 +6,13 @@ export const playerColors: Record<string, string> = {
   'Maus': '#8b5cf6',     // violet-500
   'Diederik': '#ec4899', // pink-500
   'Minne': '#14b8a6',    // teal-500
-  'Stephan': '#f97316',  // orange-500
+  'Stephan': '#dc2626',  // red-600 (changed from orange for better distinction)
   'Oscar': '#6366f1',    // indigo-500
-  'Maarten': '#84cc16',  // lime-500
+  'Maarten': '#7c3aed',  // violet-600 (changed for better distinction from Mike)
   'Geert': '#06b6d4',    // cyan-500
   'Mischa': '#a855f7',   // purple-500
-  'Sanford': '#eab308',  // yellow-500
-  'Wout': '#22c55e',     // green-500
+  'Sanford': '#facc15',  // yellow-400 (brighter yellow for better distinction)
+  'Wout': '#059669',     // emerald-600 (darker green for better distinction from lime)
 };
 
 // Get color for a player, with fallback to emerald if not found

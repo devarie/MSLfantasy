@@ -1,7 +1,6 @@
 'use client';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { getPlayerBio } from '@/data/playerBios';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getPlayerColor } from '@/data/playerColors';
 import { extractPlayerNames } from '@/utils/nameHelpers';
 
@@ -16,63 +15,81 @@ interface FantasyChartsContainerProps {
 }
 
 export default function FantasyChartsContainer({ sheets }: FantasyChartsContainerProps) {
-  // Find the Deelnemers sheet
-  const deelnemersSheet = sheets.find(sheet => sheet.name === 'Deelnemers');
+  // Filter out 'Deelnemers' sheet and only keep game sheets
+  const gameSheets = sheets.filter(sheet => sheet.name !== 'Deelnemers' && !sheet.error);
 
-  if (!deelnemersSheet || !deelnemersSheet.data || deelnemersSheet.data.length === 0) {
+  if (gameSheets.length === 0) {
     return null;
   }
 
-  // Extract data from Deelnemers sheet
-  const [headers, ...rows] = deelnemersSheet.data;
+  // Extract player names from first game sheet (skip header row)
+  const firstGameData = gameSheets[0]?.data || [];
+  const [, ...playerRows] = firstGameData;
 
-  // Find column indices (assuming headers are in Dutch)
-  const nameColumnIndex = 0; // Column A
-  const fantasyTotaleScoreIndex = headers.findIndex(h => h && h.toLowerCase().includes('fantasy totale'));
-  const besteMikeScoreIndex = headers.findIndex(h => h && h.toLowerCase().includes('beste mike'));
-
-  if (fantasyTotaleScoreIndex === -1 || besteMikeScoreIndex === -1) {
-    console.error('Could not find required columns in Deelnemers sheet');
-    return null;
-  }
-
-  // Prepare data for charts
-  const chartData = rows
+  // Get unique player names (both internal and alias)
+  const playerNamesMap = playerRows
     .map(row => {
-      const cellValue = row[nameColumnIndex];
+      const cellValue = row[0];
       if (!cellValue) return null;
+      return extractPlayerNames(cellValue);
+    })
+    .filter(Boolean) as { alias: string; internal: string }[];
+
+  // Prepare data for Fantasy Scores chart (Column C)
+  const fantasyScoresData = gameSheets.map((sheet) => {
+    const [, ...rows] = sheet.data;
+    const dataPoint: Record<string, string | number> = { game: sheet.name };
+
+    rows.forEach(row => {
+      const cellValue = row[0];
+      if (!cellValue) return;
 
       const names = extractPlayerNames(cellValue);
-      const fantasyScore = parseInt(row[fantasyTotaleScoreIndex] || '0', 10);
-      const besteMikeScore = parseInt(row[besteMikeScoreIndex] || '0', 10);
+      const fantasyScore = parseInt(row[2] || '0', 10); // Column C (index 2)
 
-      return {
-        name: names.alias,
-        internalName: names.internal,
-        fantasyScore,
-        besteMikeScore,
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => (b?.fantasyScore || 0) - (a?.fantasyScore || 0)); // Sort by fantasy score descending
+      // Use alias as key for display in chart
+      dataPoint[names.alias] = fantasyScore;
+    });
+
+    return dataPoint;
+  });
+
+  // Prepare data for Results chart (Column B)
+  const resultsData = gameSheets.map((sheet) => {
+    const [, ...rows] = sheet.data;
+    const dataPoint: Record<string, string | number> = { game: sheet.name };
+
+    rows.forEach(row => {
+      const cellValue = row[0];
+      if (!cellValue) return;
+
+      const names = extractPlayerNames(cellValue);
+      const result = parseInt(row[1] || '0', 10); // Column B (index 1) - Results
+
+      // Use alias as key for display in chart
+      dataPoint[names.alias] = result;
+    });
+
+    return dataPoint;
+  });
 
   return (
     <div className="w-full mt-12">
       <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-        Score Overzicht
+        Voortgang per Spel
       </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Fantasy Totale Score Chart */}
+        {/* Fantasy Scores Chart */}
         <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-            Fantasy Totale Score
+            Fantasy Scores per Spel
           </h3>
           <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
+            <LineChart data={fantasyScoresData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-emerald-200 dark:stroke-emerald-700" />
               <XAxis
-                dataKey="name"
+                dataKey="game"
                 className="text-xs text-zinc-600 dark:text-zinc-400"
                 angle={-45}
                 textAnchor="end"
@@ -87,25 +104,31 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
               />
-              <Bar dataKey="fantasyScore" radius={[8, 8, 0, 0]}>
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={getPlayerColor(entry?.internalName || '')} />
-                ))}
-              </Bar>
-            </BarChart>
+              {playerNamesMap.map(({ alias, internal }) => (
+                <Line
+                  key={alias}
+                  type="monotone"
+                  dataKey={alias}
+                  stroke={getPlayerColor(internal)}
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+              ))}
+            </LineChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Beste Mike Score Chart */}
+        {/* Results Chart */}
         <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-            Beste Mike Score
+            Results per Spel
           </h3>
           <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
+            <LineChart data={resultsData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-emerald-200 dark:stroke-emerald-700" />
               <XAxis
-                dataKey="name"
+                dataKey="game"
                 className="text-xs text-zinc-600 dark:text-zinc-400"
                 angle={-45}
                 textAnchor="end"
@@ -120,12 +143,18 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
               />
-              <Bar dataKey="besteMikeScore" radius={[8, 8, 0, 0]}>
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={getPlayerColor(entry?.internalName || '')} />
-                ))}
-              </Bar>
-            </BarChart>
+              {playerNamesMap.map(({ alias, internal }) => (
+                <Line
+                  key={alias}
+                  type="monotone"
+                  dataKey={alias}
+                  stroke={getPlayerColor(internal)}
+                  strokeWidth={2}
+                  dot={{ r: 4 }}
+                  activeDot={{ r: 6 }}
+                />
+              ))}
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
