@@ -111,9 +111,14 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                         {cellIndex === 0 && cell ? (
                           <button
                             onClick={() => {
+                              console.log('Player clicked:', cell);
                               const playerBio = getPlayerBio(cell);
+                              console.log('Player bio found:', playerBio);
                               if (playerBio) {
                                 setSelectedPlayer(playerBio);
+                                console.log('Selected player set');
+                              } else {
+                                console.log('No player bio found for:', cell);
                               }
                             }}
                             className="cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
