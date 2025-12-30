@@ -112,13 +112,17 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                           <button
                             onClick={() => {
                               console.log('Player clicked:', cell);
-                              const playerBio = getPlayerBio(cell);
+                              // Extract name from parentheses if present (e.g., "Michael Jordan (Geert)" -> "Geert")
+                              const match = cell.match(/\(([^)]+)\)/);
+                              const playerName = match ? match[1] : cell;
+                              console.log('Looking up player:', playerName);
+                              const playerBio = getPlayerBio(playerName);
                               console.log('Player bio found:', playerBio);
                               if (playerBio) {
                                 setSelectedPlayer(playerBio);
                                 console.log('Selected player set');
                               } else {
-                                console.log('No player bio found for:', cell);
+                                console.log('No player bio found for:', playerName);
                               }
                             }}
                             className="cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
