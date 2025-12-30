@@ -20,8 +20,13 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
 
   const hasValidAvatar = avatar && avatar !== '/images/avatars/placeholder.jpg' && !imageError;
 
+  // Render a skeleton during SSR to prevent hydration mismatch
   if (!mounted) {
-    return null;
+    return (
+      <div className="h-[700px] w-full max-w-2xl flex items-center justify-center">
+        <div className="text-emerald-600">Loading...</div>
+      </div>
+    );
   }
 
   return (
