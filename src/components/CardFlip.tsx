@@ -80,9 +80,11 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
             {name}
           </h3>
           <div className="flex-1 overflow-y-auto rounded-2xl bg-white/10 p-8 backdrop-blur-sm">
-            <p className="whitespace-pre-line text-base leading-relaxed text-white">
-              {bio}
-            </p>
+            <div className="text-base leading-relaxed text-white space-y-3">
+              {bio.split('\n').map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
+            </div>
           </div>
           <p className="mt-6 text-center text-sm text-white/80">
             Klik om terug te gaan
