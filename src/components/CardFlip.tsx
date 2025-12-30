@@ -23,14 +23,14 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   // Render a skeleton during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="h-[90vh] md:h-[700px] w-full max-w-md md:max-w-2xl flex items-center justify-center">
+      <div className="h-[80vh] md:h-[700px] w-full max-w-md md:max-w-2xl flex items-center justify-center">
         <div className="text-emerald-600">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="h-[90vh] md:h-[750px] w-full max-w-md md:max-w-2xl">
+    <div className="h-[80vh] md:h-[700px] w-full max-w-md md:max-w-2xl">
       <div className="relative h-full w-full">
         {/* Single Side with Avatar, Name, and Bio */}
         <div className="h-full flex flex-col items-center rounded-2xl md:rounded-3xl border-2 md:border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-4 md:p-8 shadow-2xl dark:from-emerald-900 dark:to-emerald-950">
