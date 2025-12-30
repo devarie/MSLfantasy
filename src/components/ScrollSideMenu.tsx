@@ -35,11 +35,11 @@ const menuItems: MenuItem[] = [
     imageAlt: 'Mike tussen stand',
   },
   {
-    id: 'smerken',
-    label: 'Broodje Smerken',
+    id: 'smeren',
+    label: 'Broodje Smeren',
     icon: Sandwich,
     imageSrc: '/images/broodjes smeren kopie.webp',
-    imageAlt: 'Broodje smerken',
+    imageAlt: 'Broodje smeren',
   },
   {
     id: 'kriebeltijd',
