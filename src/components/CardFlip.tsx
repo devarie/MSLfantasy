@@ -35,14 +35,14 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
         {/* Single Side with Avatar, Name, and Bio */}
         <div className="h-full flex flex-col items-center rounded-2xl md:rounded-3xl border-2 md:border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-4 md:p-8 shadow-2xl dark:from-emerald-900 dark:to-emerald-950">
           {/* Avatar */}
-          <div className="mb-3 md:mb-6 rounded-full border-2 md:border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
+          <div className="mb-4 md:mb-6 rounded-full border-2 md:border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
             {hasValidAvatar ? (
-              <div className="relative h-32 w-32 md:h-40 md:w-40">
+              <div className="relative h-56 w-56 md:h-48 md:w-48">
                 <Image
                   src={avatar}
                   alt={name}
-                  width={160}
-                  height={160}
+                  width={224}
+                  height={224}
                   className="h-full w-full object-cover rounded-full"
                   onError={() => setImageError(true)}
                   priority
@@ -50,8 +50,8 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
                 />
               </div>
             ) : (
-              <div className="flex h-32 w-32 md:h-40 md:w-40 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
-                <User className="h-16 w-16 md:h-20 md:w-20 text-emerald-600 dark:text-emerald-300" />
+              <div className="flex h-56 w-56 md:h-48 md:w-48 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
+                <User className="h-28 w-28 md:h-24 md:w-24 text-emerald-600 dark:text-emerald-300" />
               </div>
             )}
           </div>
