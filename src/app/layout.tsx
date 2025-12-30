@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "MSL Fantasy Ardennen",
   description: "MSL Fantasy competitie - Volg de scores en standen van jouw favoriete fantasy teams",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
