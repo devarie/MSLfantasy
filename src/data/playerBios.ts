@@ -18,7 +18,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Arie': {
     name: 'Arie',
     avatar: '/images/avatars/arie.webp',
-    bio: 'Gedijt beiden goed ter land zee en in de lucht, qua borsthaar kom je ondertussen in de buurt, doch zou je iets meer body, en wat ideale schoonzoon thematiek van je af moeten werpen om qua flair dresscode en stem indruk op z\'n kitt, kittens en kit techniek te kunnen maken.',
+    bio: 'Gedijt beiden goed ter land zee en in de lucht, qua borsthaar kom je ondertussen in de buurt, doch zou je iets meer body, en wat ideale schoonzoon thematiek van je af moeten werpen om qua flair dresscode en stem indruk op z\'n kitt, kittens en kit techniek te kunnen maken. Absoluut geen sprake van een midlifecrisis van speler',
   },
   'Maus': {
     name: 'Maus',
