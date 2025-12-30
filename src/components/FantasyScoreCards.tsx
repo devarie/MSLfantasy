@@ -3,7 +3,8 @@
 import { getPlayerColor } from '@/data/playerColors';
 
 interface Player {
-  name: string;
+  name: string;        // Internal name for lookups
+  alias: string;       // Display name (alias)
   score: number;
 }
 
@@ -116,7 +117,7 @@ export default function FantasyScoreCards({ players }: FantasyScoreCardsProps) {
                   <div className="flex-1">
                     <div className="flex items-baseline justify-between">
                       <span className="font-semibold text-zinc-900 dark:text-zinc-50">
-                        {player.name}
+                        {player.alias}
                       </span>
                       <span className="text-sm text-zinc-500 dark:text-zinc-400">
                         {percentage.toFixed(0)}%

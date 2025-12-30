@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getPlayerBio, PlayerBio } from '@/data/playerBios';
+import { extractPlayerNames, getInternalName } from '@/utils/nameHelpers';
 
 const PlayerBioModal = dynamic(() => import('./PlayerBioModal'), {
   ssr: false,
@@ -38,14 +39,12 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
   const [headers, ...rows] = currentSheet.data || [[]];
   const lastUpdate = new Date(lastUpdated).toLocaleString('nl-NL');
 
-  // Get all unique player names from the current sheet
+  // Get all unique player names from the current sheet (internal names for lookups)
   const allPlayerNames = rows
     .map(row => {
       const cellValue = row[0];
       if (!cellValue) return null;
-      // Extract name from parentheses if present
-      const match = cellValue.match(/\(([^)]+)\)/);
-      return match ? match[1] : cellValue;
+      return getInternalName(cellValue);
     })
     .filter(Boolean) as string[];
 
@@ -142,17 +141,16 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                         {cellIndex === 0 && cell ? (
                           <button
                             onClick={() => {
-                              // Extract name from parentheses if present (e.g., "Michael Jordan (Geert)" -> "Geert")
-                              const match = cell.match(/\(([^)]+)\)/);
-                              const playerName = match ? match[1] : cell;
-                              const playerBio = getPlayerBio(playerName);
+                              // Extract internal name for bio lookup
+                              const playerNames = extractPlayerNames(cell);
+                              const playerBio = getPlayerBio(playerNames.internal);
                               if (playerBio) {
                                 setSelectedPlayer(playerBio);
                               }
                             }}
                             className="cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
                           >
-                            {cell}
+                            {extractPlayerNames(cell).alias}
                           </button>
                         ) : (
                           cell || '-'

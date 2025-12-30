@@ -3,6 +3,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getPlayerBio } from '@/data/playerBios';
 import { getPlayerColor } from '@/data/playerColors';
+import { extractPlayerNames } from '@/utils/nameHelpers';
 import Image from 'next/image';
 
 interface CompetitionSheet {
@@ -64,16 +65,19 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
   const firstGameData = gameSheets[0]?.data || [];
   const [, ...playerRows] = firstGameData;
 
-  // Get unique player names
-  const playerNames = playerRows
+  // Get unique player names (both internal and alias)
+  const playerNamesMap = playerRows
     .map(row => {
       const cellValue = row[0];
       if (!cellValue) return null;
-      // Extract name from parentheses if present
-      const match = cellValue.match(/\(([^)]+)\)/);
-      return match ? match[1] : cellValue;
+      return extractPlayerNames(cellValue);
     })
-    .filter(Boolean) as string[];
+    .filter(Boolean) as { alias: string; internal: string }[];
+
+  // Create a mapping from internal name to alias for display
+  const nameToAlias = Object.fromEntries(
+    playerNamesMap.map(p => [p.internal, p.alias])
+  );
 
 
   // Prepare data for Fantasy Scores chart
@@ -85,11 +89,11 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       const cellValue = row[0];
       if (!cellValue) return;
 
-      const match = cellValue.match(/\(([^)]+)\)/);
-      const playerName = match ? match[1] : cellValue;
+      const names = extractPlayerNames(cellValue);
       const fantasyScore = parseInt(row[2] || '0', 10); // Column C (index 2)
 
-      dataPoint[playerName] = fantasyScore;
+      // Use alias as key for display in chart
+      dataPoint[names.alias] = fantasyScore;
     });
 
     return dataPoint;
@@ -104,11 +108,11 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       const cellValue = row[0];
       if (!cellValue) return;
 
-      const match = cellValue.match(/\(([^)]+)\)/);
-      const playerName = match ? match[1] : cellValue;
+      const names = extractPlayerNames(cellValue);
       const gameResult = parseInt(row[3] || '0', 10); // Column D (index 3)
 
-      dataPoint[playerName] = gameResult;
+      // Use alias as key for display in chart
+      dataPoint[names.alias] = gameResult;
     });
 
     return dataPoint;
@@ -145,12 +149,12 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
               />
-              {playerNames.map((player) => (
+              {playerNamesMap.map(({ alias, internal }) => (
                 <Line
-                  key={player}
+                  key={alias}
                   type="monotone"
-                  dataKey={player}
-                  stroke={getPlayerColor(player)}
+                  dataKey={alias}
+                  stroke={getPlayerColor(internal)}
                   strokeWidth={2}
                   dot={<CustomDot />}
                   activeDot={{ r: 14 }}
@@ -184,12 +188,12 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
               />
-              {playerNames.map((player) => (
+              {playerNamesMap.map(({ alias, internal }) => (
                 <Line
-                  key={player}
+                  key={alias}
                   type="monotone"
-                  dataKey={player}
-                  stroke={getPlayerColor(player)}
+                  dataKey={alias}
+                  stroke={getPlayerColor(internal)}
                   strokeWidth={2}
                   dot={<CustomDot />}
                   activeDot={{ r: 14 }}

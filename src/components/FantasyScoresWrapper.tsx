@@ -1,7 +1,9 @@
 import FantasyScoreCards from './FantasyScoreCards';
+import { extractPlayerNames } from '@/utils/nameHelpers';
 
 interface Player {
-  name: string;
+  name: string;        // Internal name for lookups
+  alias: string;       // Display name (alias)
   score: number;
 }
 
@@ -30,10 +32,15 @@ async function getFantasyScores(): Promise<Player[]> {
     const [, ...rows] = data.data;
 
     const players: Player[] = rows
-      .map((row: string[]) => ({
-        name: row[0] || 'Unknown',
-        score: parseInt(row[row.length - 1] || '0', 10), // Last column is Fantasy totale score
-      }))
+      .map((row: string[]) => {
+        const cellValue = row[0] || 'Unknown';
+        const names = extractPlayerNames(cellValue);
+        return {
+          name: names.internal,    // Internal name for lookups
+          alias: names.alias,      // Display name (alias)
+          score: parseInt(row[row.length - 1] || '0', 10), // Last column is Fantasy totale score
+        };
+      })
       .filter((player: Player) => player.name !== 'Unknown');
 
     return players;
