@@ -13,8 +13,6 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  console.log('CardFlip rendering:', { name, avatar });
-
   const hasValidAvatar = avatar && avatar !== '/images/avatars/placeholder.jpg' && !imageError;
 
   return (
@@ -35,9 +33,12 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
                 src={avatar}
                 alt={name}
                 className="h-72 w-72 object-cover"
-                onError={() => {
-                  console.error('Failed to load avatar:', avatar);
+                onError={(e) => {
+                  console.error('Failed to load avatar:', avatar, e);
                   setImageError(true);
+                }}
+                onLoad={() => {
+                  console.log('Avatar loaded successfully:', avatar);
                 }}
               />
             ) : (
