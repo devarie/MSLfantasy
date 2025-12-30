@@ -1,6 +1,6 @@
 'use client';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { getPlayerBio } from '@/data/playerBios';
 import { getPlayerColor } from '@/data/playerColors';
 import Image from 'next/image';
@@ -145,10 +145,6 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
               />
-              <Legend
-                wrapperStyle={{ paddingTop: '20px' }}
-                iconType="line"
-              />
               {playerNames.map((player) => (
                 <Line
                   key={player}
@@ -187,10 +183,6 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                   borderRadius: '8px',
                 }}
                 labelStyle={{ color: '#18181b', fontWeight: 'bold' }}
-              />
-              <Legend
-                wrapperStyle={{ paddingTop: '20px' }}
-                iconType="line"
               />
               {playerNames.map((player) => (
                 <Line
