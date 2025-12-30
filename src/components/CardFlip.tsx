@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { User } from 'lucide-react';
+import Image from 'next/image';
 
 interface CardFlipProps {
   name: string;
@@ -43,9 +44,11 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
         <div className="absolute inset-0 flex flex-col items-center justify-center rounded-3xl border-4 border-emerald-600 bg-gradient-to-br from-emerald-50 to-emerald-100 p-10 shadow-2xl [backface-visibility:hidden] dark:from-emerald-900 dark:to-emerald-950">
           <div className="mb-8 overflow-hidden rounded-full border-4 border-emerald-600 bg-white shadow-lg dark:border-emerald-500 dark:bg-emerald-800">
             {hasValidAvatar ? (
-              <img
+              <Image
                 src={avatar}
                 alt={name}
+                width={288}
+                height={288}
                 className="h-72 w-72 object-cover"
                 onError={(e) => {
                   console.error('Failed to load avatar:', avatar, e);
@@ -54,6 +57,8 @@ export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
                 onLoad={() => {
                   console.log('Avatar loaded successfully:', avatar);
                 }}
+                priority
+                unoptimized
               />
             ) : (
               <div className="flex h-72 w-72 items-center justify-center bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-700 dark:to-emerald-800">
