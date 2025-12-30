@@ -53,13 +53,7 @@ export const playerBios: Record<string, PlayerBio> = {
   'Geert': {
     name: 'Geert',
     avatar: '/images/avatars/geert.webp',
-    bio: `Op z'n Mokums Mikkie Jordaan.
-Bekend van de uitspraak there's no I in team, but there is an I in win en als de crying meme.
-Nog bekender van NBA basketball, wat hij in de jaren 90 op kaart zette wereldwijd.
-Was in die periode ook gym rat avant la lettre, met biceps als de Kilimanjaro.
-Pakt nu op z'n oude dag graag een golfje, op de golfbaan that is.
-Mikkie is de ultieme strijder. Hij wil altijd van iedereen winnen met elk spel.
-Valsspelen geen bezwaar: een overwinning op dubieuze wijze is nog steeds een overwinning.`,
+    bio: "Op z'n Mokums Mikkie Jordaan.\nBekend van de uitspraak there's no I in team, but there is an I in win en als de crying meme.\nNog bekender van NBA basketball, wat hij in de jaren 90 op kaart zette wereldwijd.\nWas in die periode ook gym rat avant la lettre, met biceps als de Kilimanjaro.\nPakt nu op z'n oude dag graag een golfje, op de golfbaan that is.\nMikkie is de ultieme strijder. Hij wil altijd van iedereen winnen met elk spel.\nValsspelen geen bezwaar: een overwinning op dubieuze wijze is nog steeds een overwinning.",
   },
 
   
@@ -70,12 +64,12 @@ Valsspelen geen bezwaar: een overwinning op dubieuze wijze is nog steeds een ove
   },
   'Sanford': {
     name: 'Sanford',
-    avatar: '/images/avatars/sanford.jpg',
+    avatar: '/images/avatars/placeholder.jpg',
     bio: 'Een ervaren speler met een scherp tactisch inzicht. Sanford weet precies hoe hij zijn team moet samenstellen.',
   },
   'Wout': {
     name: 'Wout',
-    avatar: '/images/avatars/wout.jpg',
+    avatar: '/images/avatars/placeholder.jpg',
     bio: 'Vastberaden en competitief. Wout speelt om te winnen en laat dat ook zien in zijn teamkeuzes.',
   },
 };
