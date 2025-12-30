@@ -79,9 +79,9 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
         Voortgang per Spel
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         {/* Fantasy Scores Chart */}
-        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
+        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
             Fantasy Scores per Spel
           </h3>
@@ -120,7 +120,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
         </div>
 
         {/* Results Chart */}
-        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
+        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
             Results per Spel
           </h3>

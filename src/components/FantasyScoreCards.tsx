@@ -33,7 +33,7 @@ export default function FantasyScoreCards({ players }: FantasyScoreCardsProps) {
       </h2>
 
       {/* Single Activity Card */}
-      <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
+      <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
         <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-around">
           {/* Activity Rings */}
           <div className="relative flex h-80 w-80 items-center justify-center">
