@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Beer, Wind, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Beer, Wind, User, Sandwich, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import ImageModal from './ImageModal';
 
 interface MenuItem {
@@ -33,6 +33,20 @@ const menuItems: MenuItem[] = [
     icon: User,
     imageSrc: '/images/mike tussen stand.webp',
     imageAlt: 'Mike tussen stand',
+  },
+  {
+    id: 'smerken',
+    label: 'Broodje Smerken',
+    icon: Sandwich,
+    imageSrc: '/images/broodjes smeren kopie.webp',
+    imageAlt: 'Broodje smerken',
+  },
+  {
+    id: 'kriebeltijd',
+    label: 'Kriebeltijd',
+    icon: Sparkles,
+    imageSrc: '/images/kriebel tijd kopie.webp',
+    imageAlt: 'Kriebeltijd',
   },
 ];
 
