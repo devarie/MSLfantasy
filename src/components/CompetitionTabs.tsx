@@ -1,8 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import PlayerBioModal from './PlayerBioModal';
+import dynamic from 'next/dynamic';
 import { getPlayerBio, PlayerBio } from '@/data/playerBios';
+
+const PlayerBioModal = dynamic(() => import('./PlayerBioModal'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface CompetitionSheet {
   name: string;
