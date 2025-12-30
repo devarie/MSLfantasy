@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User } from 'lucide-react';
 
 interface CardFlipProps {
@@ -12,8 +12,17 @@ interface CardFlipProps {
 export default function CardFlip({ name, avatar, bio }: CardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const hasValidAvatar = avatar && avatar !== '/images/avatars/placeholder.jpg' && !imageError;
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="h-[700px] w-full max-w-2xl" style={{ perspective: '1500px' }}>
