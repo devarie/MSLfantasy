@@ -1,5 +1,7 @@
 'use client';
 
+import { getPlayerColor } from '@/data/playerColors';
+
 interface Player {
   name: string;
   score: number;
@@ -16,11 +18,12 @@ export default function FantasyScoreCards({ players }: FantasyScoreCardsProps) {
   // Find max score for percentage calculation
   const maxScore = Math.max(...players.map(p => p.score));
 
-  const ringConfigs = [
-    { color: '#ff453a', label: '🥇 1e plaats', radius: 140 }, // Red/Gold
-    { color: '#30d158', label: '🥈 2e plaats', radius: 110 }, // Green/Silver
-    { color: '#64d2ff', label: '🥉 3e plaats', radius: 80 },  // Blue/Bronze
-  ];
+  // Get player colors and create ring configs
+  const ringConfigs = top3.map((player, index) => ({
+    color: getPlayerColor(player.name),
+    label: index === 0 ? '🥇 1e plaats' : index === 1 ? '🥈 2e plaats' : '🥉 3e plaats',
+    radius: 140 - (index * 30), // 140, 110, 80
+  }));
 
   return (
     <div className="w-full">

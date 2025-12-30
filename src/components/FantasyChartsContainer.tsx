@@ -2,6 +2,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { getPlayerBio } from '@/data/playerBios';
+import { getPlayerColor } from '@/data/playerColors';
 import Image from 'next/image';
 
 interface CompetitionSheet {
@@ -74,21 +75,6 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     })
     .filter(Boolean) as string[];
 
-  // Color palette for different players (emerald shades and complementary colors)
-  const playerColors = [
-    '#10b981', // emerald-500
-    '#f59e0b', // amber-500
-    '#3b82f6', // blue-500
-    '#8b5cf6', // violet-500
-    '#ec4899', // pink-500
-    '#14b8a6', // teal-500
-    '#f97316', // orange-500
-    '#6366f1', // indigo-500
-    '#84cc16', // lime-500
-    '#06b6d4', // cyan-500
-    '#a855f7', // purple-500
-    '#eab308', // yellow-500
-  ];
 
   // Prepare data for Fantasy Scores chart
   const fantasyScoresData = gameSheets.map((sheet, gameIndex) => {
@@ -163,12 +149,12 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 wrapperStyle={{ paddingTop: '20px' }}
                 iconType="line"
               />
-              {playerNames.map((player, index) => (
+              {playerNames.map((player) => (
                 <Line
                   key={player}
                   type="monotone"
                   dataKey={player}
-                  stroke={playerColors[index % playerColors.length]}
+                  stroke={getPlayerColor(player)}
                   strokeWidth={2}
                   dot={<CustomDot />}
                   activeDot={{ r: 14 }}
@@ -206,12 +192,12 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                 wrapperStyle={{ paddingTop: '20px' }}
                 iconType="line"
               />
-              {playerNames.map((player, index) => (
+              {playerNames.map((player) => (
                 <Line
                   key={player}
                   type="monotone"
                   dataKey={player}
-                  stroke={playerColors[index % playerColors.length]}
+                  stroke={getPlayerColor(player)}
                   strokeWidth={2}
                   dot={<CustomDot />}
                   activeDot={{ r: 14 }}
