@@ -47,7 +47,7 @@ export default async function Deelnemersstand() {
   return (
     <div className="w-full rounded-lg border border-emerald-200 bg-white/95 p-6 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/50">
       <div className="mb-6">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 text-center" suppressHydrationWarning>
           Laatst bijgewerkt: {lastUpdate}
         </p>
       </div>

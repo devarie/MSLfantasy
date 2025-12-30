@@ -59,7 +59,7 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
             ))}
           </div>
         </div>
-        <p className="ml-4 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="ml-4 text-sm text-zinc-500 dark:text-zinc-400" suppressHydrationWarning>
           Bijgewerkt: {lastUpdate}
         </p>
       </div>
