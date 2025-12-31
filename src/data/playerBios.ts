@@ -76,5 +76,26 @@ export const playerBios: Record<string, PlayerBio> = {
 
 // Helper function to get player bio by name
 export function getPlayerBio(name: string): PlayerBio | null {
-  return playerBios[name] || null;
+  if (!name) return null;
+
+  // Try exact match first
+  if (playerBios[name]) {
+    return playerBios[name];
+  }
+
+  // Try case-insensitive match
+  const normalizedName = name.trim();
+  const exactMatch = Object.keys(playerBios).find(
+    key => key.toLowerCase() === normalizedName.toLowerCase()
+  );
+
+  if (exactMatch) {
+    return playerBios[exactMatch];
+  }
+
+  // Log for debugging
+  console.log('Available player keys:', Object.keys(playerBios));
+  console.log('Looking for:', name, 'Normalized:', normalizedName);
+
+  return null;
 }
