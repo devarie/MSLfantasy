@@ -1,7 +1,7 @@
 // Player color mappings for consistent colors across charts and cards
 export const playerColors: Record<string, string> = {
   'Dylan': '#10b981',    // emerald-500
-  'Mike': '#f59e0b',     // amber-500
+  'Mike': '#d4a574',     // beige
   'Arie': '#3b82f6',     // blue-500
   'Maus': '#8b5cf6',     // violet-500
   'Diederik': '#ec4899', // pink-500

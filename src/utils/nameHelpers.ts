@@ -16,8 +16,8 @@ export function extractPlayerNames(cellValue: string): PlayerNames {
     return { alias: '', internal: '' };
   }
 
-  // Check if there's a name in parentheses
-  const match = cellValue.match(/^(.+?)\s*\(([^)]+)\)$/);
+  // Check if there's a name in parentheses (allow optional trailing content)
+  const match = cellValue.match(/^(.+?)\s*\(([^)]+)\)/);
 
   if (match) {
     return {
