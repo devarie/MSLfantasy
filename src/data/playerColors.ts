@@ -5,6 +5,7 @@ export const playerColors: Record<string, string> = {
   'Arie': '#3b82f6',     // blue-500
   'Maus': '#8b5cf6',     // violet-500
   'Diederik': '#ec4899', // pink-500
+  'Died': '#ec4899',     // pink-500 (alias for Diederik)
   'Minne': '#14b8a6',    // teal-500
   'Stephan': '#dc2626',  // red-600 (changed from orange for better distinction)
   'Oscar': '#6366f1',    // indigo-500

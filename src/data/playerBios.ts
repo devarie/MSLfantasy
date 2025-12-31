@@ -30,6 +30,11 @@ export const playerBios: Record<string, PlayerBio> = {
     avatar: '/images/avatars/diederik.webp',
     bio: 'Magnesium Mike\nGeen kleffe handjes voor deze allround atleet. Met de paplepel ingegoten als turntalent en met een betrouwbare supplier van solide blokken van het witte goed, zal deze Mike nooit verlegen zitten om het witte goed. En dat is maar goed ook want Magnesium Mike houdt graag grip op de zaken. Solide lagen wax, goed geslepen ijzers, bergen magnesium: niets wordt aan het toeval over gelaten. Liever een poefje te veel dan een onnodige uitglijder. In de witte stofwolken blijft de competitie verdwaasd achter...',
   },
+  'Died': {
+    name: 'Diederik',
+    avatar: '/images/avatars/diederik.webp',
+    bio: 'Magnesium Mike\nGeen kleffe handjes voor deze allround atleet. Met de paplepel ingegoten als turntalent en met een betrouwbare supplier van solide blokken van het witte goed, zal deze Mike nooit verlegen zitten om het witte goed. En dat is maar goed ook want Magnesium Mike houdt graag grip op de zaken. Solide lagen wax, goed geslepen ijzers, bergen magnesium: niets wordt aan het toeval over gelaten. Liever een poefje te veel dan een onnodige uitglijder. In de witte stofwolken blijft de competitie verdwaasd achter...',
+  },
   'Minne': {
     name: 'Minne',
     avatar: '/images/avatars/minne.webp',
