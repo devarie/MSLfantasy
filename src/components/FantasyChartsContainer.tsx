@@ -35,7 +35,17 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     })
     .filter(Boolean) as { alias: string; internal: string }[];
 
-  // Prepare data for Fantasy Scores chart (Column C)
+  // Create cumulative score tracker for each player
+  const cumulativeFantasyScores: Record<string, number> = {};
+  const cumulativeResults: Record<string, number> = {};
+
+  // Initialize cumulative scores to 0 for all players
+  playerNamesMap.forEach(({ alias }) => {
+    cumulativeFantasyScores[alias] = 0;
+    cumulativeResults[alias] = 0;
+  });
+
+  // Prepare data for Fantasy Scores chart (Column C) - CUMULATIVE
   const fantasyScoresData = gameSheets.map((sheet) => {
     const [, ...rows] = sheet.data;
     const dataPoint: Record<string, string | number> = { game: sheet.name };
@@ -47,14 +57,17 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       const names = extractPlayerNames(cellValue);
       const fantasyScore = parseInt(row[2] || '0', 10); // Column C (index 2)
 
-      // Use alias as key for display in chart
-      dataPoint[names.alias] = fantasyScore;
+      // Add to cumulative total
+      cumulativeFantasyScores[names.alias] = (cumulativeFantasyScores[names.alias] || 0) + fantasyScore;
+
+      // Use cumulative score in chart
+      dataPoint[names.alias] = cumulativeFantasyScores[names.alias];
     });
 
     return dataPoint;
   });
 
-  // Prepare data for Results chart (Column B)
+  // Prepare data for Results chart (Column B) - CUMULATIVE
   const resultsData = gameSheets.map((sheet) => {
     const [, ...rows] = sheet.data;
     const dataPoint: Record<string, string | number> = { game: sheet.name };
@@ -66,8 +79,11 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       const names = extractPlayerNames(cellValue);
       const result = parseInt(row[1] || '0', 10); // Column B (index 1) - Results
 
-      // Use alias as key for display in chart
-      dataPoint[names.alias] = result;
+      // Add to cumulative total
+      cumulativeResults[names.alias] = (cumulativeResults[names.alias] || 0) + result;
+
+      // Use cumulative score in chart
+      dataPoint[names.alias] = cumulativeResults[names.alias];
     });
 
     return dataPoint;
@@ -83,7 +99,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
         {/* Fantasy Scores Chart */}
         <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-            Fantasy Scores per Spel
+            Fantasy Totale Score
           </h3>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={fantasyScoresData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
@@ -122,7 +138,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
         {/* Results Chart */}
         <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
           <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
-            Results per Spel
+            Beste Mike Score
           </h3>
           <ResponsiveContainer width="100%" height={400}>
             <LineChart data={resultsData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>

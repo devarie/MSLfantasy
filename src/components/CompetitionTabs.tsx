@@ -4,6 +4,8 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { getPlayerBio, PlayerBio } from '@/data/playerBios';
 import { extractPlayerNames, getInternalName } from '@/utils/nameHelpers';
+import Image from 'next/image';
+import { User } from 'lucide-react';
 
 const PlayerBioModal = dynamic(() => import('./PlayerBioModal'), {
   ssr: false,
@@ -146,11 +148,37 @@ export default function CompetitionTabs({ sheets, lastUpdated }: CompetitionTabs
                               const playerBio = getPlayerBio(playerNames.internal);
                               if (playerBio) {
                                 setSelectedPlayer(playerBio);
+                              } else {
+                                console.log('No bio found for:', playerNames.internal, 'from cell:', cell);
                               }
                             }}
-                            className="cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
+                            className="flex items-center gap-2 cursor-pointer rounded px-2 py-1 transition-all hover:bg-emerald-100 hover:text-emerald-800 dark:hover:bg-emerald-800 dark:hover:text-emerald-100"
                           >
-                            {extractPlayerNames(cell).alias}
+                            {/* Avatar */}
+                            {(() => {
+                              const playerNames = extractPlayerNames(cell);
+                              const playerBio = getPlayerBio(playerNames.internal);
+                              const hasValidAvatar = playerBio?.avatar && playerBio.avatar !== '/images/avatars/placeholder.jpg';
+
+                              return hasValidAvatar ? (
+                                <div className="relative h-8 w-8 flex-shrink-0">
+                                  <Image
+                                    src={playerBio.avatar}
+                                    alt={playerNames.alias}
+                                    width={32}
+                                    height={32}
+                                    className="h-full w-full object-cover rounded-full border-2 border-emerald-600"
+                                    unoptimized
+                                  />
+                                </div>
+                              ) : (
+                                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 border-emerald-600 bg-emerald-100 dark:bg-emerald-800">
+                                  <User className="h-4 w-4 text-emerald-600 dark:text-emerald-300" />
+                                </div>
+                              );
+                            })()}
+                            {/* Player name */}
+                            <span>{extractPlayerNames(cell).alias}</span>
                           </button>
                         ) : (
                           cell || '-'
