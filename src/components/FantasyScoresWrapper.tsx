@@ -28,7 +28,7 @@ async function getFantasyScores(): Promise<Player[]> {
       return [];
     }
 
-    // Skip header row and extract names (column A) and scores (column J, last column)
+    // Skip header row and extract names (column A) and scores (column B)
     const [, ...rows] = data.data;
 
     const players: Player[] = rows
@@ -38,7 +38,7 @@ async function getFantasyScores(): Promise<Player[]> {
         return {
           name: names.internal,    // Internal name for lookups
           alias: names.alias,      // Display name (alias)
-          score: parseInt(row[row.length - 1] || '0', 10), // Last column is Fantasy totale score
+          score: parseInt(row[1], 10) || 0, // Column B is Fantasy totale score
         };
       })
       .filter((player: Player) => player.name !== 'Unknown');

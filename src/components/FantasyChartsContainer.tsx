@@ -15,8 +15,23 @@ interface FantasyChartsContainerProps {
 }
 
 export default function FantasyChartsContainer({ sheets }: FantasyChartsContainerProps) {
-  // Filter out 'Deelnemers' sheet and only keep game sheets
-  const gameSheets = sheets.filter(sheet => sheet.name !== 'Deelnemers' && !sheet.error);
+  // Filter out 'Deelnemers' sheet and only keep game sheets with actual data
+  const gameSheets = sheets.filter(sheet => {
+    if (sheet.name === 'Deelnemers' || sheet.error) return false;
+
+    // Check if sheet has data (more than just header row)
+    if (!sheet.data || sheet.data.length <= 1) return false;
+
+    // Check if any player has a non-zero score in column B or C
+    const [, ...rows] = sheet.data;
+    const hasScores = rows.some(row => {
+      const fantasyScore = parseInt(row[1], 10) || 0;
+      const mikeScore = parseInt(row[2], 10) || 0;
+      return fantasyScore > 0 || mikeScore > 0;
+    });
+
+    return hasScores;
+  });
 
   if (gameSheets.length === 0) {
     return null;
@@ -45,7 +60,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     cumulativeResults[alias] = 0;
   });
 
-  // Prepare data for Fantasy Scores chart (Column C) - CUMULATIVE
+  // Prepare data for Fantasy Scores chart (Column B) - CUMULATIVE
   const fantasyScoresData = gameSheets.map((sheet) => {
     const [, ...rows] = sheet.data;
     const dataPoint: Record<string, string | number> = { game: sheet.name };
@@ -55,7 +70,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       if (!cellValue) return;
 
       const names = extractPlayerNames(cellValue);
-      const fantasyScore = parseInt(row[2] || '0', 10); // Column C (index 2)
+      const fantasyScore = parseInt(row[1], 10) || 0; // Column B (index 1)
 
       // Add to cumulative total
       cumulativeFantasyScores[names.alias] = (cumulativeFantasyScores[names.alias] || 0) + fantasyScore;
@@ -67,7 +82,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     return dataPoint;
   });
 
-  // Prepare data for Results chart (Column B) - CUMULATIVE
+  // Prepare data for Results chart (Column C) - CUMULATIVE
   const resultsData = gameSheets.map((sheet) => {
     const [, ...rows] = sheet.data;
     const dataPoint: Record<string, string | number> = { game: sheet.name };
@@ -77,7 +92,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       if (!cellValue) return;
 
       const names = extractPlayerNames(cellValue);
-      const result = parseInt(row[1] || '0', 10); // Column B (index 1) - Results
+      const result = parseInt(row[2], 10) || 0; // Column C (index 2) - Beste Mike Score
 
       // Add to cumulative total
       cumulativeResults[names.alias] = (cumulativeResults[names.alias] || 0) + result;
