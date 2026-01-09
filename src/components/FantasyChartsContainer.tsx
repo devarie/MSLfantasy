@@ -114,19 +114,19 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
   });
 
   return (
-    <div className="w-full mt-12">
-      <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
+    <div className="w-full mt-8">
+      <h2 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
         Voortgang per Spel
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
         {/* Fantasy Scores Chart */}
-        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
-          <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
+        <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-white/95 p-3 md:p-4 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
+          <h3 className="mb-2 text-lg font-bold text-zinc-900 dark:text-zinc-50 text-center">
             Fantasy Totale Score
           </h3>
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={fantasyScoresData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
+          <ResponsiveContainer width="100%" height={500}>
+            <LineChart data={fantasyScoresData} margin={{ top: 10, right: 10, left: 0, bottom: 80 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-emerald-200 dark:stroke-emerald-700" />
               <XAxis
                 dataKey="game"
@@ -150,9 +150,9 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                   type="monotone"
                   dataKey={alias}
                   stroke={getPlayerColor(internal)}
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 6 }}
+                  strokeWidth={2.5}
+                  dot={{ r: 5 }}
+                  activeDot={{ r: 7 }}
                 />
               ))}
             </LineChart>
@@ -160,12 +160,12 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
         </div>
 
         {/* Results Chart */}
-        <div className="overflow-hidden rounded-3xl border border-emerald-200 bg-white/95 p-4 md:p-8 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
-          <h3 className="mb-4 text-xl font-bold text-zinc-900 dark:text-zinc-50 text-center">
+        <div className="overflow-hidden rounded-2xl border border-emerald-200 bg-white/95 p-3 md:p-4 shadow-xl dark:border-emerald-800 dark:bg-emerald-950/50">
+          <h3 className="mb-2 text-lg font-bold text-zinc-900 dark:text-zinc-50 text-center">
             Beste Mike Score
           </h3>
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={resultsData} margin={{ top: 5, right: 30, left: 20, bottom: 80 }}>
+          <ResponsiveContainer width="100%" height={500}>
+            <LineChart data={resultsData} margin={{ top: 10, right: 10, left: 0, bottom: 80 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-emerald-200 dark:stroke-emerald-700" />
               <XAxis
                 dataKey="game"
@@ -189,9 +189,9 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
                   type="monotone"
                   dataKey={alias}
                   stroke={getPlayerColor(internal)}
-                  strokeWidth={2}
-                  dot={{ r: 4 }}
-                  activeDot={{ r: 6 }}
+                  strokeWidth={2.5}
+                  dot={{ r: 5 }}
+                  activeDot={{ r: 7 }}
                 />
               ))}
             </LineChart>
