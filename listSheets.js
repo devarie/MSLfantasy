@@ -2,23 +2,20 @@ const { google } = require('googleapis');
 const fs = require('fs').promises;
 const path = require('path');
 
-const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
-const TOKEN_PATH = path.join(__dirname, 'token.json');
+const SERVICE_ACCOUNT_PATH = path.join(__dirname, 'service-account.json');
 const SPREADSHEET_ID = '1Gt-mQjRwPQerXUddEJjqHgq9sw4SflEkmoiXYeAjJLg';
+const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 async function authorize() {
-  const credContent = await fs.readFile(CREDENTIALS_PATH);
-  const credentials = JSON.parse(credContent);
-  const tokenContent = await fs.readFile(TOKEN_PATH);
-  const token = JSON.parse(tokenContent);
+  const serviceAccountContent = await fs.readFile(SERVICE_ACCOUNT_PATH);
+  const serviceAccount = JSON.parse(serviceAccountContent);
 
-  const clientConfig = credentials.installed || credentials.web;
-  const { client_secret, client_id } = clientConfig;
-  const redirect_uri = clientConfig.redirect_uris?.[0] || 'http://localhost:3000/oauth2callback';
-  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
+  const auth = new google.auth.GoogleAuth({
+    credentials: serviceAccount,
+    scopes: SCOPES,
+  });
 
-  oAuth2Client.setCredentials(token);
-  return oAuth2Client;
+  return auth.getClient();
 }
 
 async function listSheets() {

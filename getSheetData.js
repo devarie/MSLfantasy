@@ -2,76 +2,33 @@ const fs = require('fs').promises;
 const path = require('path');
 const { google } = require('googleapis');
 
-// Path to your credentials file
-const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
-const TOKEN_PATH = path.join(__dirname, 'token.json');
+// Path to service account file
+const SERVICE_ACCOUNT_PATH = path.join(__dirname, 'service-account.json');
 
 // The ID of your spreadsheet
 const SPREADSHEET_ID = '1Gt-mQjRwPQerXUddEJjqHgq9sw4SflEkmoiXYeAjJLg';
-const RANGE = "'Deelnemers'!A1:J14";
+const RANGE = process.argv[2] || "'Deelnemers'!A1:J14";
 
 // Scopes for Google Sheets API
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 
 /**
- * Load or request authorization to call APIs.
+ * Load service account and authorize
  */
 async function authorize() {
-  let credentials;
   try {
-    const content = await fs.readFile(CREDENTIALS_PATH);
-    credentials = JSON.parse(content);
+    const serviceAccountContent = await fs.readFile(SERVICE_ACCOUNT_PATH);
+    const serviceAccount = JSON.parse(serviceAccountContent);
+
+    const auth = new google.auth.GoogleAuth({
+      credentials: serviceAccount,
+      scopes: SCOPES,
+    });
+
+    return auth.getClient();
   } catch (err) {
-    console.error('Error loading credentials file:', err);
-    console.log('\nPlease copy your credentials file to:', CREDENTIALS_PATH);
-    process.exit(1);
-  }
-
-  const clientConfig = credentials.installed || credentials.web;
-  const { client_secret, client_id } = clientConfig;
-  const redirect_uri = clientConfig.redirect_uris?.[0] || 'http://localhost:3000/oauth2callback';
-  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
-
-  // Check if we have previously stored a token
-  try {
-    const token = await fs.readFile(TOKEN_PATH);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    return oAuth2Client;
-  } catch (err) {
-    return getNewToken(oAuth2Client);
-  }
-}
-
-/**
- * Get and store new token after prompting for user authorization
- */
-async function getNewToken(oAuth2Client) {
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: SCOPES,
-  });
-
-  console.log('\n==============================================');
-  console.log('Authorize this app by visiting this url:');
-  console.log(authUrl);
-  console.log('==============================================\n');
-  console.log('After authorization, you will be redirected to a URL.');
-  console.log('Copy the CODE from that URL and run:');
-  console.log('node getSheetData.js YOUR_CODE_HERE\n');
-
-  const code = process.argv[2];
-  if (!code) {
-    process.exit(0);
-  }
-
-  try {
-    const { tokens } = await oAuth2Client.getToken(code);
-    oAuth2Client.setCredentials(tokens);
-    await fs.writeFile(TOKEN_PATH, JSON.stringify(tokens));
-    console.log('Token stored successfully!\n');
-    return oAuth2Client;
-  } catch (err) {
-    console.error('Error retrieving access token:', err);
+    console.error('Error loading service account:', err.message);
+    console.log('\nPlease ensure service-account.json exists at:', SERVICE_ACCOUNT_PATH);
     process.exit(1);
   }
 }
