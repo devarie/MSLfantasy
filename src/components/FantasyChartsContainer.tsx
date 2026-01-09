@@ -15,6 +15,8 @@ interface FantasyChartsContainerProps {
 }
 
 export default function FantasyChartsContainer({ sheets }: FantasyChartsContainerProps) {
+  console.log('📊 All sheets received:', sheets.map(s => s.name));
+
   // Filter out 'Deelnemers' sheet and only keep game sheets with actual data
   const gameSheets = sheets.filter(sheet => {
     if (sheet.name === 'Deelnemers' || sheet.error) return false;
@@ -22,12 +24,19 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     // Check if sheet has data (more than just header row)
     if (!sheet.data || sheet.data.length <= 1) return false;
 
-    // Check if any player has a non-zero score in column B or C
+    // Check if any player has a non-zero score in column B or D
     const [, ...rows] = sheet.data;
     const hasScores = rows.some(row => {
       const fantasyScore = parseInt(row[1], 10) || 0;
-      const mikeScore = parseInt(row[2], 10) || 0;
+      const mikeScore = parseInt(row[3], 10) || 0; // Column D (index 3)
       return fantasyScore > 0 || mikeScore > 0;
+    });
+
+    console.log(`📋 Sheet "${sheet.name}":`, {
+      hasData: sheet.data.length > 1,
+      hasScores,
+      sampleRow: rows[0],
+      columnD: rows[0]?.[3]
     });
 
     return hasScores;
@@ -82,7 +91,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
     return dataPoint;
   });
 
-  // Prepare data for Results chart (Column C) - CUMULATIVE
+  // Prepare data for Results chart (Column D) - CUMULATIVE
   const resultsData = gameSheets.map((sheet) => {
     const [, ...rows] = sheet.data;
     const dataPoint: Record<string, string | number> = { game: sheet.name };
@@ -92,7 +101,7 @@ export default function FantasyChartsContainer({ sheets }: FantasyChartsContaine
       if (!cellValue) return;
 
       const names = extractPlayerNames(cellValue);
-      const result = parseInt(row[2], 10) || 0; // Column C (index 2) - Beste Mike Score
+      const result = parseInt(row[3], 10) || 0; // Column D (index 3) - Beste Mike Score
 
       // Add to cumulative total
       cumulativeResults[names.alias] = (cumulativeResults[names.alias] || 0) + result;

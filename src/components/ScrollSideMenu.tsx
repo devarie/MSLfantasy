@@ -57,21 +57,14 @@ export default function ScrollSideMenu() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scoresSection = document.getElementById('scores');
-      if (scoresSection) {
-        const rect = scoresSection.getBoundingClientRect();
-        const scrollY = window.scrollY;
+      const welcomeSection = document.getElementById('welkom');
+      if (welcomeSection) {
+        const rect = welcomeSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // Calculate if we're at the FantasyScoreCards/charts section
-        // This is approximately when we're scrolled past the competition tabs
-        const isAtBottomOfScores = scrollY > (scoresSection.offsetTop + 800);
-
-        // Show menu when scores section is in view but NOT at the fantasy cards/charts section
+        // Show menu only when welcome section is in view
         const isInView = rect.top <= windowHeight && rect.bottom >= 0;
-        const shouldShow = isInView && !isAtBottomOfScores;
-
-        setIsVisible(shouldShow);
+        setIsVisible(isInView);
       }
     };
 
